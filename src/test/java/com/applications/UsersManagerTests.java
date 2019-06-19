@@ -14,6 +14,7 @@ public class UsersManagerTests {
     public void setup() {
         usersManager = new UsersManager();
         usersManager.deleteUsersFile();
+        Utils.inTest = true;
     }
 
     @Test
@@ -91,11 +92,16 @@ public class UsersManagerTests {
     
     @Test
     public void getUserAccount() {
+        Utils.userSubstitute = "Admin";
+        usersManager.createAdminIfNotExists();
+        User user = usersManager.getUserAccount();
         
+        Assert.assertEquals(user.name, "Admin");
     }
 
     @After
     public void finish() {
         usersManager.deleteUsersFile();
+        Utils.inTest = false;
     }
 }

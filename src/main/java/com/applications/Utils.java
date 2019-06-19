@@ -5,28 +5,34 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Utils {
-    
-    static String getUserResponse() {
+    static boolean inTest = false;
+    static String userSubstitute = "";
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = null;
-        try {
-            str = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
+    static String getUserResponse() {
+        String result = null;
+
+        if (!inTest) {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                result = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            result = userSubstitute;
         }
-        
-        return str;        
+
+        return result;
     }
-    
+
     static void displayMessage(String message) {
-        System.out.println(message);        
+        System.out.println(message);
     }
-    
+
     static void logMessage(String message) {
-                
+
     }
-    
+
     static void handleCommands(UsersManager usersManager) {
         String choice = null;
 
@@ -34,18 +40,18 @@ public class Utils {
             System.out.println(" > ");
             choice = Utils.getUserResponse();
             switch (choice) {
-                case "adduser":
-                    displayMessage("Nom de l'utilisateur : ");
-                    String userName = Utils.getUserResponse();
-                    usersManager.createUser(userName);
-                    displayMessage("Utilisateur créé.");
-                    break;
-                case "exit":
-                    displayMessage("Fermeture de l'application.");
-                    break;
-                default:
-                    displayMessage("Commande inconnue");
+            case "adduser":
+                displayMessage("Nom de l'utilisateur : ");
+                String userName = Utils.getUserResponse();
+                usersManager.createUser(userName);
+                displayMessage("Utilisateur créé.");
+                break;
+            case "exit":
+                displayMessage("Fermeture de l'application.");
+                break;
+            default:
+                displayMessage("Commande inconnue");
             }
         }
-    } 
+    }
 }
