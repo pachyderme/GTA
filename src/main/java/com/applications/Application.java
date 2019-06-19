@@ -6,14 +6,17 @@ import java.io.InputStreamReader;
 
 public class Application {
     private static UsersManager usersManager;
+    private static TasksManager tasksManager;
 
     public static void main(String[] args) {
+        usersManager = new UsersManager();
+        tasksManager = new TasksManager();
+        
         connection();
         handleCommands();
     }
 
     public static void connection() {
-        usersManager = new UsersManager();
         usersManager.createAdminIfNotExists();
 
         String userName = "";
@@ -50,6 +53,12 @@ public class Application {
                 String userName = askString();
                 usersManager.createUser(userName);
                 System.out.println("Utilisateur créé.");
+                break;
+            case "addtask":
+                System.out.println("Nom de la tâche : ");
+                String taskName = askString();
+                tasksManager.createTask(taskName);
+                System.out.println("Tâche créée.");
                 break;
             case "exit":
                 System.out.println("Fermeture de l'application.");
