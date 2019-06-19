@@ -92,7 +92,6 @@ public class UsersManager {
 			}
 		}
 	}
-
 	
 	public void createUser(String name) {
 		ArrayList<String> users = getUsersFromFile();
