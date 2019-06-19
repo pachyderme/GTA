@@ -11,10 +11,10 @@ import java.util.Arrays;
 
 public class UsersManager {
     private static final String USERS_FILE_PATH = "data/users.csv";
-    
+
     public ArrayList<String> getUsersFromFile() {
         ArrayList<String> results = new ArrayList<String>();
-        
+
         createUsersFileIsNotExists();
 
         BufferedReader reader;
@@ -30,17 +30,17 @@ public class UsersManager {
         }
         return results;
     }
-    
+
     public boolean adminExists() {
         User user = new User("Admin");
         return userExists(user);
     }
-    
+
     public boolean userExists(User user) {
         ArrayList<String> users = getUsersFromFile();
         return users.contains(user.name);
     }
-    
+
     public void createAdminIfNotExists() {
         if (!adminExists()) {
             ArrayList<String> users = getUsersFromFile();
@@ -49,10 +49,10 @@ public class UsersManager {
             saveUsersInFile(users);
         }
     }
-    
+
     public void saveUsersInFile(ArrayList<String> users) {
         FileOutputStream fos = null;
-        
+
         try {
             fos = new FileOutputStream(USERS_FILE_PATH);
             byte[] outputResult = String.join(",", users).getBytes();
@@ -72,19 +72,19 @@ public class UsersManager {
             }
         }
     }
-    
+
     public boolean deleteUsersFile() {
         File file = new File(USERS_FILE_PATH);
-        
+
         return file.delete();
     }
-    
+
     public boolean usersFileExists() {
         File file = new File(USERS_FILE_PATH);
-        
+
         return file.exists();
     }
-    
+
     public void createUsersFileIsNotExists() {
         if (!usersFileExists()) {
             System.out.println("Création du fichier " + USERS_FILE_PATH);
@@ -97,7 +97,7 @@ public class UsersManager {
             }
         }
     }
-    
+
     public void createUser(String name) {
         ArrayList<String> users = getUsersFromFile();
         users.add(name);
