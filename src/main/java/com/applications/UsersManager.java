@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UsersManager {
-	private static final String USERS_FILE_PATH = "C:\\GTA\\users.csv";
+	private static final String USERS_FILE_PATH = "data/users.csv";
 	
 	public ArrayList<String> getUsersFromFile() {
 		ArrayList<String> results = new ArrayList<String>();
