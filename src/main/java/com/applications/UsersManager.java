@@ -82,7 +82,7 @@ public class UsersManager {
 	
 	public void createUsersFileIsNotExists() {
 		if (!usersFileExists()) {
-			System.out.println("Création du fichier " + USERS_FILE_PATH);
+			System.out.println("CrÃ©ation du fichier " + USERS_FILE_PATH);
 			File file = new File(USERS_FILE_PATH);
 			file.getParentFile().mkdirs();
 			try {
@@ -91,5 +91,13 @@ public class UsersManager {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	
+	public void createUser(String name) {
+		ArrayList<String> users = getUsersFromFile();
+        users.add(name);
+
+        saveUsersInFile(users);
 	}
 }

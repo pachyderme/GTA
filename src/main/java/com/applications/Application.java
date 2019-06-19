@@ -13,10 +13,14 @@ public class Application {
 		String choice = null;
 		
 		while (!"exit".equals(choice)) {
-			choice = askChoice();
+			System.out.println(" > ");
+			choice = askString();
 			switch (choice) {
 				case "adduser":
-					System.out.println("Ajout d'un utilisateur.");
+					System.out.println("Nom de l'utilisateur : ");
+					String name = askString();
+					usersManager.createUser(name);
+					System.out.println("Utilisateur créé.");
 					break;
 				case "exit":
 					System.out.println("Fermeture de l'application.");
@@ -27,15 +31,14 @@ public class Application {
 		}
 	}
 	
-	private static String askChoice() {
-		System.out.println(" > ");
+	private static String askString() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String choice = null;
+		String str = null;
 		try {
-			choice = br.readLine();
+			str = br.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return choice;
+		return str;
 	}
 }
