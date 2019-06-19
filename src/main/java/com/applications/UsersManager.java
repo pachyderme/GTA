@@ -12,6 +12,10 @@ import java.util.Arrays;
 public class UsersManager {
     private static final String USERS_FILE_PATH = "data/users.csv";
     
+    /**
+     * Get the users from the users file
+     * @return
+     */
     public ArrayList<String> getUsersFromFile() {
         ArrayList<String> results = new ArrayList<String>();
         
@@ -31,25 +35,43 @@ public class UsersManager {
         return results;
     }
     
+    /**
+     * Check if the admin user exists
+     * @return
+     */
     public boolean adminExists() {
         User user = new User("Admin");
         return userExists(user);
     }
     
+    /**
+     * Check if a user exists
+     * @param user
+     * @return boolean
+     */
     public boolean userExists(User user) {
         ArrayList<String> users = getUsersFromFile();
         return users.contains(user.name);
     }
     
+    /**
+     * Create the admin user if not exists
+     */
     public void createAdminIfNotExists() {
         if (!adminExists()) {
             ArrayList<String> users = getUsersFromFile();
             users.add("Admin");
 
             saveUsersInFile(users);
+        }else {
+            Utils.logMessage("L'administrateur existe déjà.");
         }
     }
     
+    /**
+     * Save the users in the users file
+     * @param users
+     */
     public void saveUsersInFile(ArrayList<String> users) {
         FileOutputStream fos = null;
         
@@ -66,6 +88,8 @@ public class UsersManager {
                 if (fos != null) {
                     fos.flush();
                     fos.close();
+                }else {
+                    Utils.logMessage("fileOutPutStream déjà vide");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -73,21 +97,31 @@ public class UsersManager {
         }
     }
     
+    /**
+     * Delete the users file
+     * @return boolean
+     */
     public boolean deleteUsersFile() {
         File file = new File(USERS_FILE_PATH);
-        
         return file.delete();
     }
     
+    /**
+     * Check if the users file exists
+     * @return boolean
+     */
     public boolean usersFileExists() {
         File file = new File(USERS_FILE_PATH);
-        
         return file.exists();
     }
     
+    /**
+     * Create user file if the users file not exists
+     */
     public void createUsersFileIsNotExists() {
         if (!usersFileExists()) {
-            System.out.println("Création du fichier " + USERS_FILE_PATH);
+            Utils.logMessage("Création du fichier " + USERS_FILE_PATH);
+
             File file = new File(USERS_FILE_PATH);
             file.getParentFile().mkdirs();
             try {
@@ -98,10 +132,42 @@ public class UsersManager {
         }
     }
     
+    /**
+     * Create a user
+     * @param name
+     */
     public void createUser(String name) {
         ArrayList<String> users = getUsersFromFile();
         users.add(name);
 
         saveUsersInFile(users);
+    }
+    
+    /**
+     * Connection
+     */
+    public User getUserAccount() {
+        createAdminIfNotExists();
+                
+        String userName = "";
+        User user = null;
+        boolean knownUser = false;
+        while (!knownUser) {
+            Utils.displayMessage("Saisissez votre nom :");
+            userName = Utils.getUserResponse();
+            
+            user = new User(userName);
+            knownUser = userExists(user);
+            
+            if (!knownUser) {
+                Utils.displayMessage("Utilisateur incconu");
+            }else {
+                Utils.logMessage("Utilisateur trouvé");
+            }
+        }
+        
+        Utils.displayMessage("Bienvenue " + userName);
+        
+        return user;
     }
 }
