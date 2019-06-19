@@ -25,6 +25,27 @@ public class UsersManagerTests {
 	}
 	
 	@Test
+	public void userNotExists() {
+		usersManager.deleteUsersFile();
+		
+		User user = new User("Kevin");
+		boolean userExists = usersManager.userExists(user);
+		
+		Assert.assertFalse(userExists);
+	}
+	
+	@Test
+	public void userExists() {
+		usersManager.deleteUsersFile();
+		
+		usersManager.createAdminIfNotExists();
+		User user = new User("Admin");
+
+		boolean userExists = usersManager.userExists(user);
+		Assert.assertTrue(userExists);
+	}
+	
+	@Test
 	public void adminCreated() {
 		usersManager.deleteUsersFile();
 		

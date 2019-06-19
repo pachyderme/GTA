@@ -32,8 +32,13 @@ public class UsersManager {
 	}
 	
 	public boolean adminExists() {
+		User user = new User("Admin");
+		return userExists(user);
+	}
+	
+	public boolean userExists(User user) {
 		ArrayList<String> users = getUsersFromFile();
-		return users.contains("Admin");
+		return users.contains(user.name);
 	}
 	
 	public void createAdminIfNotExists() {
