@@ -3,10 +3,8 @@ package com.applications;
 public class Application {
 
 	public static void main(String[] args) {
-		System.out.println("Hello World !");
-	}
+		UsersManager usersManager = new UsersManager();
 
-	public static int add(int a, int b) {
-		return a + b;
+		usersManager.createAdminIfNotExists();
 	}
 }
