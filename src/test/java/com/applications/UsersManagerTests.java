@@ -44,7 +44,7 @@ public class UsersManagerTests {
 	}
 
 	@Test
-	public void getUsersFilled() {
+	public void getUsersFilledWithAdmin() {
 		usersManager.deleteUsersFile();
 		
 		usersManager.createAdminIfNotExists();
@@ -52,6 +52,19 @@ public class UsersManagerTests {
 		ArrayList<String> users = usersManager.getUsersFromFile();
 		
 		Assert.assertFalse(users.isEmpty());
+	}
+
+	@Test
+	public void getUsersFilledWithUser() {
+		usersManager.deleteUsersFile();
+
+		usersManager.createUser("Pierre");
+		usersManager.createUser("Paul");
+		usersManager.createUser("Jacques");
+		
+		ArrayList<String> users = usersManager.getUsersFromFile();
+		
+		Assert.assertEquals(users.size(), 3);
 	}
 	
 	@After

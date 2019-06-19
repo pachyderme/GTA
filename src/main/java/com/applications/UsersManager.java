@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UsersManager {
-	private static final String USERS_FILE_PATH = "C:\\GTA\\users.csv";
+	private static final String USERS_FILE_PATH = "data/users.csv";
 	
 	public ArrayList<String> getUsersFromFile() {
 		ArrayList<String> results = new ArrayList<String>();
@@ -82,7 +82,7 @@ public class UsersManager {
 	
 	public void createUsersFileIsNotExists() {
 		if (!usersFileExists()) {
-			System.out.println("Création du fichier " + USERS_FILE_PATH);
+			System.out.println("CrÃ©ation du fichier " + USERS_FILE_PATH);
 			File file = new File(USERS_FILE_PATH);
 			file.getParentFile().mkdirs();
 			try {
@@ -91,5 +91,12 @@ public class UsersManager {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void createUser(String name) {
+		ArrayList<String> users = getUsersFromFile();
+        users.add(name);
+
+        saveUsersInFile(users);
 	}
 }
