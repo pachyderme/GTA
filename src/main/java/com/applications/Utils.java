@@ -3,6 +3,8 @@ package com.applications;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Utils class.
@@ -85,6 +87,9 @@ public class Utils {
                 tasksManager.createTask(taskName);
                 displayMessage("Tâche créée.");
                 break;
+            case "showusers":
+                showUsers(usersManager);
+                break;
             case "exit":
                 displayMessage("Fermeture de l'application.");
                 break;
@@ -109,7 +114,17 @@ public class Utils {
         displayMessage(" - help: Affichage de la liste des commandes disponibles.");
         displayMessage(" - adduser: Création d'un utilisateur.");
         displayMessage(" - addtask: Création d'une tâche.");
+        displayMessage(" - showusers: Liste les utilisateurs.");
         displayMessage(" - exit: Fermeture de l'application.");
         displayMessage("");
+    }
+    
+    private static void showUsers(UsersManager usersManager) {
+        ArrayList<String> users = usersManager.getUsersFromFile();
+        displayMessage("Liste des utilisateurs :");
+        Iterator<String> it = users.iterator();
+        while (it.hasNext()) {
+            displayMessage(" - " + it.next());         
+        }
     }
 }
