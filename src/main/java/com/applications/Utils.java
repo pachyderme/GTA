@@ -90,6 +90,9 @@ public class Utils {
             case "showusers":
                 showUsers(usersManager);
                 break;
+            case "showtasks":
+                showTasks(tasksManager);
+                break;
             case "exit":
                 displayMessage("Deconnexion.");
                 if (!inTest) {
@@ -119,12 +122,13 @@ public class Utils {
         displayMessage(" - adduser: Création d'un utilisateur.");
         displayMessage(" - addtask: Création d'une tâche.");
         displayMessage(" - showusers: Liste les utilisateurs.");
+        displayMessage(" - showtasks: Liste les tâches.");
         displayMessage(" - exit: Fermeture de l'application.");
         displayMessage("");
     }
     
     /**
-     * Show the user list
+     * Display the user list
      * @param usersManager
      */
     private static void showUsers(UsersManager usersManager) {
@@ -134,5 +138,18 @@ public class Utils {
         while (it.hasNext()) {
             displayMessage(" - " + it.next());         
         }
+    }
+    
+    /**
+     *  Display the tasks list
+     * @param tasksManager
+     */
+    private static void showTasks(TasksManager tasksManager) {
+        ArrayList<String> tasks = tasksManager.getTasksFromFile();
+        displayMessage("Liste des tâches :");
+        Iterator<String> it = tasks.iterator();
+        while (it.hasNext()) {
+            displayMessage(" - " + it.next());         
+        }   
     }
 }
