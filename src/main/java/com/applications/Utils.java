@@ -64,7 +64,7 @@ public class Utils {
      * @param usersManager
      * @param tasksManager
      */
-    static void handleCommands(UsersManager usersManager, TasksManager tasksManager) {
+    static void handleCommands(UsersManager usersManager, TasksManager tasksManager, User user) {
         String choice = null;
         showCommands();
 
@@ -93,17 +93,36 @@ public class Utils {
             case "showtasks":
                 showTasks(tasksManager);
                 break;
+            case "assigntask":
+                showTasks(tasksManager);
+                displayMessage("ID de la tâche : ");
+                String taskId = Utils.getUserResponse();
+                try {
+                    Task task = new Task(Integer.parseInt(taskId), "");
+                    if (tasksManager.taskExists(task)) {
+                        ArrayList<Task> tasks = tasksManager.getTasksFromFile();
+                        Iterator<Task> it = tasks.iterator();
+                        while (it.hasNext()) {
+                            Task tmpTask = it.next();
+                            if (tmpTask.id == task.id) {
+                                tmpTask.assignedUser = user.name;
+                            }
+                        }
+
+                        tasksManager.saveTasksInFile(tasks);
+                        displayMessage("Tâche assignée.");
+                    }
+                } catch (NumberFormatException e) {
+                    displayMessage(taskId + " n'est pas une valeur correcte.");
+                }
+
+                break;
             case "exit":
                 displayMessage("Deconnexion.");
-                if (!inTest) {
-                    usersManager.getUserAccount();
-                }
-                showCommands();
                 break;
             default:
-                displayMessage(
-                        "Commande inconnue. Tapez \"help\"" +
-                        " pour voir la liste des commandes disponibles.");
+                displayMessage("Commande inconnue. Tapez \"help\"" 
+            + " pour voir la liste des commandes disponibles.");
                 break;
             }
 
@@ -121,14 +140,16 @@ public class Utils {
         displayMessage(" - help: Affichage de la liste des commandes disponibles.");
         displayMessage(" - adduser: Création d'un utilisateur.");
         displayMessage(" - addtask: Création d'une tâche.");
+        displayMessage(" - assigntask: Affectation d'une tâche.");
         displayMessage(" - showusers: Liste les utilisateurs.");
         displayMessage(" - showtasks: Liste les tâches.");
         displayMessage(" - exit: Fermeture de l'application.");
         displayMessage("");
     }
-    
+
     /**
      * Display the user list
+     * 
      * @param usersManager
      */
     private static void showUsers(UsersManager usersManager) {
@@ -136,20 +157,22 @@ public class Utils {
         displayMessage("Liste des utilisateurs :");
         Iterator<String> it = users.iterator();
         while (it.hasNext()) {
-            displayMessage(" - " + it.next());         
+            displayMessage(" - " + it.next());
         }
     }
-    
+
     /**
-     *  Display the tasks list
+     * Display the tasks list
+     * 
      * @param tasksManager
      */
     private static void showTasks(TasksManager tasksManager) {
-        ArrayList<String> tasks = tasksManager.getTasksFromFile();
+        ArrayList<Task> tasks = tasksManager.getTasksFromFile();
         displayMessage("Liste des tâches :");
-        Iterator<String> it = tasks.iterator();
+        Iterator<Task> it = tasks.iterator();
         while (it.hasNext()) {
-            displayMessage(" - " + it.next());         
-        }   
+            Task task = it.next();
+            displayMessage(" - " + task.id + " " + task.name + " " + task.assignedUser);
+        }
     }
 }

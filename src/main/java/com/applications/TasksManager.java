@@ -8,9 +8,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Task manager class.
+ * 
  * @author GTA
  *
  */
@@ -23,8 +26,8 @@ public class TasksManager {
      * 
      * @return tasks
      */
-    public ArrayList<String> getTasksFromFile() {
-        ArrayList<String> results = new ArrayList<String>();
+    public ArrayList<Task> getTasksFromFile() {
+        ArrayList<Task> results = new ArrayList<Task>();
 
         createTasksFileIsNotExists();
 
@@ -33,7 +36,14 @@ public class TasksManager {
             reader = new BufferedReader(new FileReader(TASKS_FILE_PATH));
             String line = reader.readLine();
             while (line != null) {
-                results.addAll(Arrays.asList(line.split(",")));
+                List<String> tmp = Arrays.asList(line.split(";"));
+                Iterator<String> it = tmp.iterator();
+                while (it.hasNext()) {
+                    List<String> tmpTask = Arrays.asList(it.next().split(","));
+                    int taskId = Integer.parseInt(tmpTask.get(0));
+                    Task task = new Task(taskId, tmpTask.get(1), tmpTask.get(2));
+                    results.add(task);
+                }
                 line = reader.readLine();
             }
             reader.close();
@@ -45,12 +55,18 @@ public class TasksManager {
 
     /**
      * Check if a task exists.
+     * 
      * @param task
      * @return boolean
      */
     public boolean taskExists(Task task) {
-        ArrayList<String> tasks = getTasksFromFile();
-        return tasks.contains(task.name);
+        boolean results = false;
+        ArrayList<Task> tasks = getTasksFromFile();
+        Iterator<Task> it = tasks.iterator();
+        while (it.hasNext() && !results) {
+            results = it.next().id == task.id;
+        }
+        return results;
     }
 
     /**
@@ -58,12 +74,17 @@ public class TasksManager {
      * 
      * @param tasks
      */
-    public void saveTasksInFile(ArrayList<String> tasks) {
+    public void saveTasksInFile(ArrayList<Task> tasks) {
+        Iterator<Task> it = tasks.iterator();
+        ArrayList<String> fileContent = new ArrayList<String>();
+        while (it.hasNext()) {
+            fileContent.add(it.next().toString());
+        }
         try {
             FileOutputStream fos = new FileOutputStream(TASKS_FILE_PATH);
 
             try {
-                byte[] outputResult = String.join(",", tasks).getBytes();
+                byte[] outputResult = String.join(";", fileContent).getBytes();
                 fos.write(outputResult);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -113,7 +134,7 @@ public class TasksManager {
      */
     public void createTasksFileIsNotExists() {
         if (!tasksFileExists()) {
-            System.out.println("Création du fichier " + TASKS_FILE_PATH);
+            Utils.logMessage("Création du fichier " + TASKS_FILE_PATH);
             File file = new File(TASKS_FILE_PATH);
             file.getParentFile().mkdirs();
             try {
@@ -126,12 +147,21 @@ public class TasksManager {
 
     /**
      * Create a task.
+     * 
      * @param name
      */
-    public void createTask(String name) {
-        ArrayList<String> tasks = getTasksFromFile();
-        tasks.add(name);
-
+    public Task createTask(String name) {
+        ArrayList<Task> tasks = getTasksFromFile();
+        int id;
+        if (tasks.isEmpty()) {
+            id = 0;
+        } else {
+            Task lastTask = tasks.get(tasks.size() - 1);
+            id = lastTask.id;
+        }
+        Task task = new Task(id, name);
+        tasks.add(task);
         saveTasksInFile(tasks);
+        return task;
     }
 }

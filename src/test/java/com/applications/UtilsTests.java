@@ -57,6 +57,7 @@ public class UtilsTests {
     @Test
     public void handleCommand() {
         Utils.responseSubstitute = command;
-        Utils.handleCommands(usersManager, tasksManager);
+        User user = new User("Admin");
+        Utils.handleCommands(usersManager, tasksManager, user);
     }
 }

@@ -27,9 +27,9 @@ public class TasksManagerTests {
         Task task = new Task("Tester");
         tasksManager.deleteTasksFile();
 
-        tasksManager.createTask(task.name);
+        Task receivedTask = tasksManager.createTask(task.name);
         
-        boolean taskExists = tasksManager.taskExists(task);
+        boolean taskExists = tasksManager.taskExists(receivedTask);
         Assert.assertTrue(taskExists);
     }
 
