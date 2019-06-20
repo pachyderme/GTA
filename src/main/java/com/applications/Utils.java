@@ -107,8 +107,9 @@ public class Utils {
     private static void showUsers(UsersManager usersManager) {
         ArrayList<String> users = usersManager.getUsersFromFile();
         displayMessage("Liste des utilisateurs :");
-        for (String user : users) {
-            displayMessage("- "+user);      
+        Iterator<String> it = users.iterator();
+        while (it.hasNext()) {
+            displayMessage(" - " + it.next());         
         }
     }
 }
