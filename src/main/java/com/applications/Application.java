@@ -26,14 +26,17 @@ public class Application {
             System.out.println("Saisissez votre nom :");
             userName = askString();
 
-            user = new User(userName);
-            knownUser = usersManager.userExists(user);
-
-            if (!knownUser) {
-                System.out.println("Utilisateur incconu");
+            if (!"".equals(userName)) {
+                user = new User(userName);
+                knownUser = usersManager.userExists(user);
+    
+                if (!knownUser) {
+                    System.out.println("Utilisateur incconu");
+                }
             }
         }
 
+        System.out.println("");
         System.out.println("Bienvenue " + userName);
     }
 
@@ -63,6 +66,8 @@ public class Application {
             case "exit":
                 System.out.println("Fermeture de l'application.");
                 break;
+            case "":
+                break;
             default:
                 System.out.println("Commande inconnue. Tapez \"help\" pour voir la liste des commandes disponibles.");
             }
@@ -76,6 +81,7 @@ public class Application {
         System.out.println("Commandes disponibles :");
         System.out.println(" - help: Affichage de la liste des commandes disponibles.");
         System.out.println(" - adduser: Création d'un utilisateur.");
+        System.out.println(" - addtask: Création d'une tâche.");
         System.out.println(" - exit: Fermeture de l'application.");
         System.out.println("");
     }
@@ -89,7 +95,7 @@ public class Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return str;
+        return str.trim();
     }
 
 }
