@@ -26,7 +26,7 @@ public class Utils {
             result = userSubstitute;
         }
 
-        return result;
+        return result.trim();
     }
 
     /**
@@ -48,8 +48,9 @@ public class Utils {
     /**
      * Handle the user's commands
      * @param usersManager
+     * @param tasksManager
      */
-    static void handleCommands(UsersManager usersManager) {
+    static void handleCommands(UsersManager usersManager, TasksManager tasksManager) {
         String choice = null;
 
         while (!"exit".equals(choice)) {
@@ -64,6 +65,12 @@ public class Utils {
                 String userName = Utils.getUserResponse();
                 usersManager.createUser(userName);
                 displayMessage("Utilisateur créé.");
+                break;
+            case "addtask":
+                displayMessage("Nom de la tâche : ");
+                String taskName = Utils.getUserResponse();
+                tasksManager.createTask(taskName);
+                displayMessage("Tâche créée.");
                 break;
             case "exit":
                 displayMessage("Fermeture de l'application.");
@@ -81,6 +88,7 @@ public class Utils {
         displayMessage("Commandes disponibles :");
         displayMessage(" - help: Affichage de la liste des commandes disponibles.");
         displayMessage(" - adduser: Création d'un utilisateur.");
+        displayMessage(" - addtask: Création d'une tâche.");
         displayMessage(" - exit: Fermeture de l'application.");
         displayMessage("");
     }
