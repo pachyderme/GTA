@@ -1,6 +1,9 @@
 package com.applications;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Task manager class.
@@ -17,8 +20,19 @@ public class TasksManager {
      * 
      * @return tasks
      */
-    public ArrayList<String> getTasksFromFile() {
-        return FilesManager.readFile(TASKS_FILE_PATH);
+    public ArrayList<Task> getTasksFromFile() {
+        ArrayList<String> names = FilesManager.readFile(TASKS_FILE_PATH);
+        ArrayList<Task> results = new ArrayList<Task>();
+        
+        Iterator<String> it = names.iterator();
+        while (it.hasNext()) {
+            List<String> tmpTask = Arrays.asList(it.next().split(","));
+            int taskId = Integer.parseInt(tmpTask.get(0));
+            Task task = new Task(taskId, tmpTask.get(1), tmpTask.get(2));
+            results.add(task);
+        }
+        
+        return results;
     }
 
     /**
@@ -42,7 +56,7 @@ public class TasksManager {
      * 
      * @param tasks
      */
-    public void saveTasksInFile(ArrayList<String> tasks) {
+    public void saveTasksInFile(ArrayList<Task> tasks) {
         FilesManager.saveItemsInFile(TASKS_FILE_PATH, tasks);
     }
 

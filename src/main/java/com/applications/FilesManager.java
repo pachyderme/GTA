@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * Files manager class.
@@ -25,7 +26,7 @@ public class FilesManager {
             try {
                 String line = reader.readLine();
                 while (line != null) {
-                    results.addAll(Arrays.asList(line.split(",")));
+                    results.addAll(Arrays.asList(line.split(";")));
                     line = reader.readLine();
                 }
             } catch (IOException e) {
@@ -42,16 +43,21 @@ public class FilesManager {
     
     /**
      * Save the lines in the file.
+     * @param <T>
      * 
      * @param users
      */
-    public static void saveItemsInFile(String path, ArrayList<String> items) {
+    public static <T> void saveItemsInFile(String path, ArrayList<T> items) {
         try {
             FileOutputStream fos = new FileOutputStream(path);
 
             try {
-                byte[] outputResult = String.join(",", items).getBytes();
-                fos.write(outputResult);
+                Iterator<T> it = items.iterator();
+                while (it.hasNext()) {
+                    Object item = it.next();
+                    byte[] outputResult = String.join(";", item.toString()).getBytes();
+                    fos.write(outputResult);
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {

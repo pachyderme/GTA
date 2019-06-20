@@ -1,7 +1,5 @@
 package com.applications.commands;
 
-import java.util.Iterator;
-
 import com.applications.LogsManager;
 import com.applications.User;
 

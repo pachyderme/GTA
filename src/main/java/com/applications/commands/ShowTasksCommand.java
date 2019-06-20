@@ -3,6 +3,7 @@ package com.applications.commands;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.applications.Task;
 import com.applications.TasksManager;
 import com.applications.User;
 import com.applications.Utils;
@@ -31,12 +32,12 @@ public class ShowTasksCommand extends Command {
         super.execute();
 
         TasksManager usersManager = new TasksManager();
-        ArrayList<String> users = usersManager.getTasksFromFile();
+        ArrayList<Task> tasks = usersManager.getTasksFromFile();
         Utils.displayMessage("Liste des tâches :");
 
-        Iterator<String> it = users.iterator();
+        Iterator<Task> it = tasks.iterator();
         while (it.hasNext()) {
-            Utils.displayMessage(" - " + it.next());
+            Utils.displayMessage(" - " + it.next().getName());
         }
     }
 
