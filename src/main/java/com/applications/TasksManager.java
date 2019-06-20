@@ -40,7 +40,9 @@ public class TasksManager {
                 Iterator<String> it = tmp.iterator();
                 while (it.hasNext()) {
                     List<String> tmpTask = Arrays.asList(it.next().split(","));
-                    results.add(new Task(Integer.parseInt(tmpTask.get(0)), tmpTask.get(1)));
+                    int taskId = Integer.parseInt(tmpTask.get(0));
+                    Task task = new Task(taskId, tmpTask.get(1), tmpTask.get(2));
+                    results.add(task);
                 }
                 line = reader.readLine();
             }
@@ -62,7 +64,7 @@ public class TasksManager {
         ArrayList<Task> tasks = getTasksFromFile();
         Iterator<Task> it = tasks.iterator();
         while (it.hasNext() && !results) {
-            results = it.next().name.equals(task.name);
+            results = it.next().id == task.id;
         }
         return results;
     }
@@ -132,7 +134,7 @@ public class TasksManager {
      */
     public void createTasksFileIsNotExists() {
         if (!tasksFileExists()) {
-            System.out.println("Création du fichier " + TASKS_FILE_PATH);
+            Utils.logMessage("Création du fichier " + TASKS_FILE_PATH);
             File file = new File(TASKS_FILE_PATH);
             file.getParentFile().mkdirs();
             try {
@@ -148,7 +150,7 @@ public class TasksManager {
      * 
      * @param name
      */
-    public void createTask(String name) {
+    public Task createTask(String name) {
         ArrayList<Task> tasks = getTasksFromFile();
         int id;
         if (tasks.isEmpty()) {
@@ -160,5 +162,6 @@ public class TasksManager {
         Task task = new Task(id, name);
         tasks.add(task);
         saveTasksInFile(tasks);
+        return task;
     }
 }

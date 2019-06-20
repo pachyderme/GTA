@@ -9,6 +9,7 @@ package com.applications;
 public class Task {
     public String name;
     public int id;
+    public String assignedUser = "Admin";
 
     public Task(String nameSelected) {
         name = nameSelected;
@@ -17,6 +18,12 @@ public class Task {
     public Task(int idSelected, String nameSelected) {
         id = idSelected;
         name = nameSelected;
+    }
+    
+    public Task(int idSelected, String nameSelected, String assignedUserSelected) {
+        id = idSelected;
+        name = nameSelected;
+        assignedUser = assignedUserSelected;
     }
 
     public String getName() {
@@ -37,7 +44,15 @@ public class Task {
 
     @Override
     public String toString() {
-        return id + "," + name;
+        return id + "," + name + "," + assignedUser;
+    }
+
+    public String getAssignedUser() {
+        return assignedUser;
+    }
+
+    public void setAssignedUser(String assignedUser) {
+        this.assignedUser = assignedUser;
     }
 
 }

@@ -2,6 +2,7 @@ package com.applications;
 
 /**
  * Application class.
+ * 
  * @author GTA
  */
 public class Application {
@@ -10,12 +11,15 @@ public class Application {
 
     /**
      * Start the application.
+     * 
      * @param args
      */
     public static void main(String[] args) {
         usersManager = new UsersManager();
         tasksManager = new TasksManager();
-        usersManager.getUserAccount();
-        Utils.handleCommands(usersManager, tasksManager);
+        while (true) {
+            User user = usersManager.getUserAccount();
+            Utils.handleCommands(usersManager, tasksManager, user);
+        }
     }
 }
