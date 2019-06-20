@@ -1,13 +1,21 @@
 package com.applications.commands;
 
 import com.applications.TasksManager;
+import com.applications.User;
 import com.applications.Utils;
 
+/**
+ * Add Task Command class.
+ * @author GTA
+ *
+ */
 public class AddTaskCommand extends Command {
     /**
      * Constructor.
      */
-    public AddTaskCommand() {
+    public AddTaskCommand(User loggedUser) {
+        super(loggedUser);
+        
         name = "addtask";
         description = "Création d'une tâche.";
     }

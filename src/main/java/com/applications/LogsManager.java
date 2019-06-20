@@ -2,12 +2,17 @@ package com.applications;
 
 import java.util.ArrayList;
 
+/**
+ * Logs manager class.
+ * @author kevin
+ *
+ */
 public class LogsManager {
 
     private static final String BEGIN_LOG_FILE_PATH = "data/logs/";
 
-    protected User loggedUser;
-    protected String path;
+    protected transient User loggedUser;
+    protected transient String path;
 
     /**
      * Constructor.

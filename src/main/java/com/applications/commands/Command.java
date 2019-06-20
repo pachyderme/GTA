@@ -1,31 +1,37 @@
 package com.applications.commands;
 
-import com.applications.Utils;
+import java.util.Iterator;
 
+import com.applications.LogsManager;
+import com.applications.User;
+
+/**
+ * Command class.
+ * @author GTA
+ *
+ */
 public abstract class Command {
 
-    public String name;
-    public String description;
+    public transient String name;
+    public transient String description;
+    public transient User loggedUser;
     
+    
+    public Command(User loggedUser) {
+        super();
+        this.loggedUser = loggedUser;
+    }
+
     public void execute() {
-        Utils.displayMessage("[Commande exécutée: " + name + "]");
+        LogsManager logsManager = new LogsManager(loggedUser);
+        logsManager.addLog(name);
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    
 }

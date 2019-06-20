@@ -48,9 +48,10 @@ public class CommandsManagerTests {
             {"addtask"},
             {"showusers"},
             {"showtasks"},
+            {"history"},
             {"help"},
             {"not exist"},
-            {"exit"},
+            {"exit"}
         });
     }
 
@@ -66,7 +67,7 @@ public class CommandsManagerTests {
     public void handleCommand() {
         Utils.responseSubstitute = command;
         
-        CommandsManager commandsManager = new CommandsManager(new User("Test"));
+        commandsManager = new CommandsManager(new User("Test"));
         commandsManager.handleCommands(usersManager, tasksManager);
     }
 

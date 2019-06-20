@@ -1,12 +1,16 @@
 package com.applications;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.applications.commands.AddTaskCommand;
 import com.applications.commands.AddUserCommand;
 import com.applications.commands.Command;
 import com.applications.commands.ExitCommand;
 import com.applications.commands.HelpCommand;
+import com.applications.commands.HistoryCommand;
+import com.applications.commands.ShowTasksCommand;
+import com.applications.commands.ShowUsersCommand;
 import com.applications.commands.UnknownCommand;
 
 /**
@@ -16,9 +20,9 @@ import com.applications.commands.UnknownCommand;
  */
 public class CommandsManager {
 
-    protected ArrayList<Command> commands;
-    protected ExitCommand exitCommand;
-    protected User loggedUser;
+    protected transient ArrayList<Command> commands;
+    protected transient ExitCommand exitCommand;
+    protected transient User loggedUser;
     
     public CommandsManager(User loggedUser) {
         this.loggedUser = loggedUser;
@@ -29,6 +33,9 @@ public class CommandsManager {
         commands.add(new HelpCommand(loggedUser));
         commands.add(new AddUserCommand(loggedUser));
         commands.add(new AddTaskCommand(loggedUser));
+        commands.add(new ShowUsersCommand(loggedUser));
+        commands.add(new ShowTasksCommand(loggedUser));
+        commands.add(new HistoryCommand(loggedUser));
         commands.add(exitCommand);
     }
     
@@ -39,30 +46,33 @@ public class CommandsManager {
      * @param tasksManager
      */
     public void handleCommands(UsersManager usersManager, TasksManager tasksManager) {
-        String commandName = null;
+        String commandName;
         showCommands();
         
-
-        while (!exitCommand.getName().equals(commandName)) {
+        do {
             Utils.displayMessage(" > ");
             commandName = Utils.getUserResponse();
             
-            Command matchedCommand = null;
-            for (Command command : commands) {
-                if (commandName.equals(command.getName())) {
-                    matchedCommand = command;
-                }
-            }
-            
-            if (matchedCommand == null) {
-                matchedCommand = new UnknownCommand(loggedUser, commandName);
-            }
+            Command matchedCommand = getCommand(commandName);
             matchedCommand.execute();
             
             if (Utils.inTest) {
                 commandName = exitCommand.getName();
             }
         }
+        while (!exitCommand.getName().equals(commandName));
+    }
+    
+    private Command getCommand(String commandName) {
+        Iterator<Command> it = commands.iterator();
+        while (it.hasNext()) {
+            Command command = it.next();
+            if (commandName.equals(command.getName())) {
+                return command;
+            }
+        }
+        
+        return new UnknownCommand(loggedUser, commandName);
     }
 
     /**
@@ -70,7 +80,9 @@ public class CommandsManager {
      */
     public void showCommands() {
         Utils.displayMessage("Commandes disponibles :");
-        for (Command command : commands) {
+        Iterator<Command> it = commands.iterator();
+        while (it.hasNext()) {
+            Command command = it.next();
             Utils.displayMessage(" - " + command.getName() + ": " + command.getDescription());
         }
         Utils.displayMessage("");

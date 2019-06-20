@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Files manager class.
+ * @author kevin
+ *
+ */
 public class FilesManager {
 
     public static ArrayList<String> readFile (String path) {
