@@ -12,6 +12,10 @@ apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
 
+javadoc {
+	source = sourceSets.main.allJava
+	classpath = configurations.compile
+}
 repositories {
     mavenCentral()
 }
