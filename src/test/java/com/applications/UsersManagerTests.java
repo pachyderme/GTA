@@ -1,19 +1,20 @@
 package com.applications;
 
 import java.util.ArrayList;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Users manager tests class
+ * Users manager tests class.
  * 
  * @author GTA
  */
 public class UsersManagerTests {
     /**
-     * Users manager
+     * Users manager.
      */
     private transient UsersManager usersManager;
 
@@ -99,7 +100,7 @@ public class UsersManagerTests {
 
     @Test
     public void getUserAccount() {
-        Utils.userSubstitute = "Admin";
+        Utils.responseSubstitute = "Admin";
         usersManager.createAdminIfNotExists();
         User user = usersManager.getUserAccount();
 

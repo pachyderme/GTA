@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * User manager class
+ * User manager class.
  * 
  * @author GTA
  */
@@ -18,7 +18,7 @@ public class UsersManager {
     private static final String USERS_FILE_PATH = "data/users.csv";
 
     /**
-     * Get the users from the users file
+     * Get the users from the users file.
      * 
      * @return
      */
@@ -26,24 +26,28 @@ public class UsersManager {
         ArrayList<String> results = new ArrayList<String>();
 
         createUsersFileIsNotExists();
-
-        BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader(USERS_FILE_PATH));
-            String line = reader.readLine();
-            while (line != null) {
-                results.addAll(Arrays.asList(line.split(",")));
-                line = reader.readLine();
+            BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE_PATH));
+            try {
+                String line = reader.readLine();
+                while (line != null) {
+                    results.addAll(Arrays.asList(line.split(",")));
+                    line = reader.readLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                reader.close();
             }
-            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return results;
     }
 
     /**
-     * Check if the admin user exists
+     * Check if the admin user exists.
      * 
      * @return
      */
@@ -53,7 +57,7 @@ public class UsersManager {
     }
 
     /**
-     * Check if a user exists
+     * Check if a user exists.
      * 
      * @param user
      * @return boolean
@@ -64,7 +68,7 @@ public class UsersManager {
     }
 
     /**
-     * Create the admin user if not exists
+     * Create the admin user if not exists.
      */
     public void createAdminIfNotExists() {
         if (!adminExists()) {
@@ -78,7 +82,7 @@ public class UsersManager {
     }
 
     /**
-     * Save the users in the users file
+     * Save the users in the users file.
      * 
      * @param users
      */
@@ -111,7 +115,7 @@ public class UsersManager {
     }
 
     /**
-     * Delete the users file
+     * Delete the users file.
      * 
      * @return boolean
      */
@@ -121,7 +125,7 @@ public class UsersManager {
     }
 
     /**
-     * Check if the users file exists
+     * Check if the users file exists.
      * 
      * @return boolean
      */
@@ -131,7 +135,7 @@ public class UsersManager {
     }
 
     /**
-     * Create user file if the users file not exists
+     * Create user file if the users file not exists.
      */
     public void createUsersFileIsNotExists() {
         if (!usersFileExists()) {
@@ -148,7 +152,7 @@ public class UsersManager {
     }
 
     /**
-     * Create a user
+     * Create a user.
      * 
      * @param name
      */
@@ -160,7 +164,7 @@ public class UsersManager {
     }
 
     /**
-     * Connection
+     * Connection.
      */
     public User getUserAccount() {
         createAdminIfNotExists();

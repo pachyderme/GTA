@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Task manager class
+ * Task manager class.
  * @author GTA
  *
  */
@@ -18,6 +18,11 @@ public class TasksManager {
 
     private static final String TASKS_FILE_PATH = "data/tasks.csv";
 
+    /**
+     * Get the tasks from the tasks file.
+     * 
+     * @return tasks
+     */
     public ArrayList<String> getTasksFromFile() {
         ArrayList<String> results = new ArrayList<String>();
 
@@ -38,16 +43,21 @@ public class TasksManager {
         return results;
     }
 
-    public boolean adminExists() {
-        Task task = new Task("Admin");
-        return taskExists(task);
-    }
-
+    /**
+     * Check if a task exists.
+     * @param task
+     * @return boolean
+     */
     public boolean taskExists(Task task) {
         ArrayList<String> tasks = getTasksFromFile();
         return tasks.contains(task.name);
     }
 
+    /**
+     * Save the tasks in the tasks file.
+     * 
+     * @param tasks
+     */
     public void saveTasksInFile(ArrayList<String> tasks) {
         try {
             FileOutputStream fos = new FileOutputStream(TASKS_FILE_PATH);
@@ -76,18 +86,31 @@ public class TasksManager {
         }
     }
 
+    /**
+     * Delete the tasks file.
+     * 
+     * @return boolean
+     */
     public boolean deleteTasksFile() {
         File file = new File(TASKS_FILE_PATH);
 
         return file.delete();
     }
 
+    /**
+     * Check if the tasks file exists.
+     * 
+     * @return boolean
+     */
     public boolean tasksFileExists() {
         File file = new File(TASKS_FILE_PATH);
 
         return file.exists();
     }
 
+    /**
+     * Create the tasks file if is not exists.
+     */
     public void createTasksFileIsNotExists() {
         if (!tasksFileExists()) {
             System.out.println("Création du fichier " + TASKS_FILE_PATH);
@@ -101,6 +124,10 @@ public class TasksManager {
         }
     }
 
+    /**
+     * Create a task.
+     * @param name
+     */
     public void createTask(String name) {
         ArrayList<String> tasks = getTasksFromFile();
         tasks.add(name);

@@ -5,15 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Utils class
+ * Utils class.
+ * 
  * @author GTA
  */
 public class Utils {
     static boolean inTest = false;
-    static String userSubstitute = "";
-    
+    static String responseSubstitute = "";
+
     /**
-     * Get the user response from command line
+     * Get the user response from command line.
+     * 
      * @return
      */
     static String getUserResponse() {
@@ -26,22 +28,28 @@ public class Utils {
                 e.printStackTrace();
             }
         } else {
-            return userSubstitute;
+            return responseSubstitute;
         }
 
         return null;
     }
 
     /**
-     * Display a message to the output
+     * Display a message to the output.
+     * 
      * @param message
      */
     static void displayMessage(String message) {
-        System.out.println(message);
+        if (!inTest) {
+            System.out.println(message);
+        } else {
+            logMessage("en test");
+        }
     }
 
     /**
-     * Log a message
+     * Log a message.
+     * 
      * @param message
      */
     static void logMessage(String message) {
@@ -49,15 +57,17 @@ public class Utils {
     }
 
     /**
-     * Handle the user's commands
+     * Handle the user's commands.
+     * 
      * @param usersManager
      * @param tasksManager
      */
     static void handleCommands(UsersManager usersManager, TasksManager tasksManager) {
         String choice = null;
+        showCommands();
 
         while (!"exit".equals(choice)) {
-            System.out.println(" > ");
+            displayMessage(" > ");
             choice = Utils.getUserResponse();
             switch (choice) {
             case "help":
@@ -79,13 +89,18 @@ public class Utils {
                 displayMessage("Fermeture de l'application.");
                 break;
             default:
-                displayMessage("Commande inconnue. Tapez \"help\""
-                        + " pour voir la liste des commandes disponibles.");
+                displayMessage(
+                        "Commande inconnue. Tapez \"help\"" +
+                        " pour voir la liste des commandes disponibles.");
                 break;
+            }
+
+            if (inTest) {
+                choice = "exit";
             }
         }
     }
-    
+
     /**
      * Show the commands list.
      */
