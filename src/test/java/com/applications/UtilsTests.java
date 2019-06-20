@@ -38,6 +38,7 @@ public class UtilsTests {
             {"adduser"},
             {"addtask"},
             {"showusers"},
+            {"showtasks"},
             {"help"},
             {"not exist"},
             {"exit"},
