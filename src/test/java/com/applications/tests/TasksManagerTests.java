@@ -1,8 +1,12 @@
-package com.applications;
+package com.applications.tests;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.applications.Task;
+import com.applications.TasksManager;
+import com.applications.Utils;
 
 /**
  * Tasks manager tests class.

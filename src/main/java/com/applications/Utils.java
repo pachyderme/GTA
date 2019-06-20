@@ -12,15 +12,15 @@ import java.util.Iterator;
  * @author GTA
  */
 public class Utils {
-    static boolean inTest = false;
-    static String responseSubstitute = "";
+    public static boolean inTest = false;
+    public static String responseSubstitute = "";
 
     /**
      * Get the user response from command line.
      * 
      * @return
      */
-    static String getUserResponse() {
+    public static String getUserResponse() {
 
         if (!inTest) {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -41,12 +41,8 @@ public class Utils {
      * 
      * @param message
      */
-    static void displayMessage(String message) {
-        if (!inTest) {
-            System.out.println(message);
-        } else {
-            logMessage("en test");
-        }
+    public static void displayMessage(String message) {
+        System.out.println(message);
     }
 
     /**
@@ -54,77 +50,8 @@ public class Utils {
      * 
      * @param message
      */
-    static void logMessage(String message) {
-
-    }
-
-    /**
-     * Handle the user's commands.
-     * 
-     * @param usersManager
-     * @param tasksManager
-     */
-    static void handleCommands(UsersManager usersManager, TasksManager tasksManager) {
-        String choice = null;
-        showCommands();
-
-        while (!"exit".equals(choice)) {
-            displayMessage(" > ");
-            choice = Utils.getUserResponse();
-            switch (choice) {
-            case "help":
-                showCommands();
-                break;
-            case "adduser":
-                displayMessage("Nom de l'utilisateur : ");
-                String userName = Utils.getUserResponse();
-                usersManager.createUser(userName);
-                displayMessage("Utilisateur créé.");
-                break;
-            case "addtask":
-                displayMessage("Nom de la tâche : ");
-                String taskName = Utils.getUserResponse();
-                tasksManager.createTask(taskName);
-                displayMessage("Tâche créée.");
-                break;
-            case "showusers":
-                showUsers(usersManager);
-                break;
-            case "showtasks":
-                showTasks(tasksManager);
-                break;
-            case "exit":
-                displayMessage("Deconnexion.");
-                if (!inTest) {
-                    usersManager.getUserAccount();
-                }
-                showCommands();
-                break;
-            default:
-                displayMessage(
-                        "Commande inconnue. Tapez \"help\"" +
-                        " pour voir la liste des commandes disponibles.");
-                break;
-            }
-
-            if (inTest) {
-                choice = "exit";
-            }
-        }
-    }
-
-    /**
-     * Show the commands list.
-     */
-    private static void showCommands() {
-        displayMessage("Commandes disponibles :");
-        displayMessage(" - help: Affichage de la liste des commandes disponibles.");
-        displayMessage(" - adduser: Création d'un utilisateur.");
-        displayMessage(" - addtask: Création d'une tâche.");
-        displayMessage(" - showusers: Liste les utilisateurs.");
-        displayMessage(" - showtasks: Liste les tâches.");
-        displayMessage(" - exit: Fermeture de l'application.");
-        displayMessage("");
+    public static void logMessage(String message) {
+        System.out.println("[" + message + "]");
     }
     
     /**
