@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Task manager class.
+ * 
  * @author GTA
  *
  */
@@ -22,12 +23,18 @@ public class TasksManager {
 
     /**
      * Check if a task exists.
+     * 
      * @param task
      * @return boolean
      */
     public boolean taskExists(Task task) {
-        ArrayList<String> tasks = getTasksFromFile();
-        return tasks.contains(task.name);
+        boolean results = false;
+        ArrayList<Task> tasks = getTasksFromFile();
+        Iterator<Task> it = tasks.iterator();
+        while (it.hasNext() && !results) {
+            results = it.next().id == task.id;
+        }
+        return results;
     }
 
     /**
@@ -66,12 +73,21 @@ public class TasksManager {
 
     /**
      * Create a task.
+     * 
      * @param name
      */
-    public void createTask(String name) {
-        ArrayList<String> tasks = getTasksFromFile();
-        tasks.add(name);
-
+    public Task createTask(String name) {
+        ArrayList<Task> tasks = getTasksFromFile();
+        int id;
+        if (tasks.isEmpty()) {
+            id = 0;
+        } else {
+            Task lastTask = tasks.get(tasks.size() - 1);
+            id = lastTask.id;
+        }
+        Task task = new Task(id, name);
+        tasks.add(task);
         saveTasksInFile(tasks);
+        return task;
     }
 }
