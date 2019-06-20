@@ -1,11 +1,16 @@
 package com.applications;
 
+/**
+ * Task class
+ * @author GTA
+ *
+ */
 public class Task {
     public String name;
     public int id;
 
     public Task(String nameSelected) {
-        this.setName(nameSelected);
+        name = nameSelected;
     }
 
     public String getName() {

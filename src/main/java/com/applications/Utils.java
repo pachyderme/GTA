@@ -21,7 +21,7 @@ public class Utils {
         if (!inTest) {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             try {
-                return br.readLine();
+                return br.readLine().trim();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Task manager class
+ * @author GTA
+ *
+ */
 public class TasksManager {
 
     private static final String TASKS_FILE_PATH = "data/tasks.csv";
@@ -21,9 +26,10 @@ public class TasksManager {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(TASKS_FILE_PATH));
-            String line = null;
-            while ((line = reader.readLine()) != null) {
+            String line = reader.readLine();
+            while (line != null) {
                 results.addAll(Arrays.asList(line.split(",")));
+                line = reader.readLine();
             }
             reader.close();
         } catch (IOException e) {
@@ -43,25 +49,30 @@ public class TasksManager {
     }
 
     public void saveTasksInFile(ArrayList<String> tasks) {
-        FileOutputStream fos = null;
-
         try {
-            fos = new FileOutputStream(TASKS_FILE_PATH);
-            byte[] outputResult = String.join(",", tasks).getBytes();
-            fos.write(outputResult);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+            FileOutputStream fos = new FileOutputStream(TASKS_FILE_PATH);
+
             try {
-                if (fos != null) {
-                    fos.flush();
-                    fos.close();
-                }
+                byte[] outputResult = String.join(",", tasks).getBytes();
+                fos.write(outputResult);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    if (fos != null) {
+                        fos.flush();
+                        fos.close();
+                    } else {
+                        Utils.logMessage("fileOutPutStream déjà vide");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
