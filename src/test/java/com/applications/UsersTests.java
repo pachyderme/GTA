@@ -3,6 +3,10 @@ package com.applications;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Users tests class
+ * @author GTA
+ */
 public class UsersTests {
     @Test
     public void adminExists() {

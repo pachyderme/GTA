@@ -1,12 +1,16 @@
 package com.applications;
 
+/**
+ * User class
+ * @author GTA
+ */
 public class User {
     public String type;
     public String name;
     public int id;
 
     public User(String nameSelected) {
-        this.setName(nameSelected);
+        name = nameSelected;
     }
 
     public String getType() {

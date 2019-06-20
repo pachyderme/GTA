@@ -4,29 +4,32 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Utils class
+ * @author GTA
+ */
 public class Utils {
     static boolean inTest = false;
     static String userSubstitute = "";
     
     /**
-     * Get the user response from commande line
+     * Get the user response from command line
      * @return
      */
     static String getUserResponse() {
-        String result = null;
 
         if (!inTest) {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             try {
-                result = br.readLine();
+                return br.readLine();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            result = userSubstitute;
+            return userSubstitute;
         }
 
-        return result;
+        return null;
     }
 
     /**
@@ -69,7 +72,9 @@ public class Utils {
                 displayMessage("Fermeture de l'application.");
                 break;
             default:
-                displayMessage("Commande inconnue. Tapez \"help\" pour voir la liste des commandes disponibles.");
+                displayMessage("Commande inconnue. Tapez \"help\""
+                        + " pour voir la liste des commandes disponibles.");
+                break;
             }
         }
     }

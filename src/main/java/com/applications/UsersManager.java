@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * User manager class
+ * 
+ * @author GTA
+ */
 public class UsersManager {
     private static final String USERS_FILE_PATH = "data/users.csv";
 
@@ -25,9 +30,10 @@ public class UsersManager {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(USERS_FILE_PATH));
-            String line = null;
-            while ((line = reader.readLine()) != null) {
+            String line = reader.readLine();
+            while (line != null) {
                 results.addAll(Arrays.asList(line.split(",")));
+                line = reader.readLine();
             }
             reader.close();
         } catch (IOException e) {
@@ -77,27 +83,30 @@ public class UsersManager {
      * @param users
      */
     public void saveUsersInFile(ArrayList<String> users) {
-        FileOutputStream fos = null;
-
         try {
-            fos = new FileOutputStream(USERS_FILE_PATH);
-            byte[] outputResult = String.join(",", users).getBytes();
-            fos.write(outputResult);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+            FileOutputStream fos = new FileOutputStream(USERS_FILE_PATH);
+
             try {
-                if (fos != null) {
-                    fos.flush();
-                    fos.close();
-                } else {
-                    Utils.logMessage("fileOutPutStream déjà vide");
-                }
+                byte[] outputResult = String.join(",", users).getBytes();
+                fos.write(outputResult);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    if (fos != null) {
+                        fos.flush();
+                        fos.close();
+                    } else {
+                        Utils.logMessage("fileOutPutStream déjà vide");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -156,8 +165,8 @@ public class UsersManager {
     public User getUserAccount() {
         createAdminIfNotExists();
 
-        String userName = "";
-        User user = null;
+        String userName;
+        User user;
         boolean knownUser = false;
         while (!knownUser) {
             Utils.displayMessage("Saisissez votre nom :");
@@ -170,11 +179,11 @@ public class UsersManager {
                 Utils.displayMessage("Utilisateur incconu");
             } else {
                 Utils.logMessage("Utilisateur trouvé");
+                Utils.displayMessage("Bienvenue " + userName);
+                return user;
             }
         }
 
-        Utils.displayMessage("Bienvenue " + userName);
-
-        return user;
+        return null;
     }
 }

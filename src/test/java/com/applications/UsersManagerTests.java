@@ -1,17 +1,24 @@
 package com.applications;
 
 import java.util.ArrayList;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Users manager tests class
+ * 
+ * @author GTA
+ */
 public class UsersManagerTests {
-    private UsersManager usersManager;
+    /**
+     * Users manager
+     */
+    private transient UsersManager usersManager;
 
     @Before
-    public void setup() {
+    public void beforeTests() {
         usersManager = new UsersManager();
         usersManager.deleteUsersFile();
         Utils.inTest = true;
@@ -49,7 +56,7 @@ public class UsersManagerTests {
     @Test
     public void adminCreated() {
         usersManager.deleteUsersFile();
-        
+
         usersManager.createAdminIfNotExists();
         usersManager.createAdminIfNotExists();
 
@@ -89,18 +96,18 @@ public class UsersManagerTests {
 
         Assert.assertEquals(users.size(), 3);
     }
-    
+
     @Test
     public void getUserAccount() {
         Utils.userSubstitute = "Admin";
         usersManager.createAdminIfNotExists();
         User user = usersManager.getUserAccount();
-        
+
         Assert.assertEquals(user.name, "Admin");
     }
 
     @After
-    public void finish() {
+    public void afterTests() {
         usersManager.deleteUsersFile();
         Utils.inTest = false;
     }
