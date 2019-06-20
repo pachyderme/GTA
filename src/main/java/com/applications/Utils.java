@@ -91,7 +91,11 @@ public class Utils {
                 showUsers(usersManager);
                 break;
             case "exit":
-                displayMessage("Fermeture de l'application.");
+                displayMessage("Deconnexion.");
+                if (!inTest) {
+                    usersManager.getUserAccount();
+                }
+                showCommands();
                 break;
             default:
                 displayMessage(
@@ -119,6 +123,10 @@ public class Utils {
         displayMessage("");
     }
     
+    /**
+     * Show the user list
+     * @param usersManager
+     */
     private static void showUsers(UsersManager usersManager) {
         ArrayList<String> users = usersManager.getUsersFromFile();
         displayMessage("Liste des utilisateurs :");

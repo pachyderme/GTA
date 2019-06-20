@@ -37,6 +37,7 @@ public class UtilsTests {
         return Arrays.asList(new Object[][]{
             {"adduser"},
             {"addtask"},
+            {"showusers"},
             {"help"},
             {"not exist"},
             {"exit"},
