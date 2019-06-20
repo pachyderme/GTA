@@ -93,6 +93,11 @@ public class Utils {
             case "showtasks":
                 showTasks(tasksManager);
                 break;
+            case "assigntask":
+                showTasks(tasksManager);
+                displayMessage("ID de la tâche : ");
+                displayMessage("ID de l'utilisateur : ");
+                break;
             case "exit":
                 displayMessage("Deconnexion.");
                 if (!inTest) {
@@ -145,11 +150,11 @@ public class Utils {
      * @param tasksManager
      */
     private static void showTasks(TasksManager tasksManager) {
-        ArrayList<String> tasks = tasksManager.getTasksFromFile();
+        ArrayList<Task> tasks = tasksManager.getTasksFromFile();
         displayMessage("Liste des tâches :");
-        Iterator<String> it = tasks.iterator();
+        Iterator<Task> it = tasks.iterator();
         while (it.hasNext()) {
-            displayMessage(" - " + it.next());         
+            displayMessage(" - " + it.next().name);         
         }   
     }
 }

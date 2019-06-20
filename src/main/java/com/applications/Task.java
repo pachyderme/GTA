@@ -2,6 +2,7 @@ package com.applications;
 
 /**
  * Task class.
+ * 
  * @author GTA
  *
  */
@@ -10,6 +11,11 @@ public class Task {
     public int id;
 
     public Task(String nameSelected) {
+        name = nameSelected;
+    }
+
+    public Task(int idSelected, String nameSelected) {
+        id = idSelected;
         name = nameSelected;
     }
 
@@ -27,6 +33,11 @@ public class Task {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + name;
     }
 
 }
