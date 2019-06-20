@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Users tests class
+ * Users tests class.
  * @author GTA
  */
 public class UsersTests {

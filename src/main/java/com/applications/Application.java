@@ -1,7 +1,7 @@
 package com.applications;
 
 /**
- * Application class
+ * Application class.
  * @author GTA
  */
 public class Application {
@@ -9,11 +9,12 @@ public class Application {
     private static TasksManager tasksManager;
 
     /**
-     * Start the application
+     * Start the application.
      * @param args
      */
     public static void main(String[] args) {
         usersManager = new UsersManager();
+        tasksManager = new TasksManager();
         usersManager.getUserAccount();
         Utils.handleCommands(usersManager, tasksManager);
     }

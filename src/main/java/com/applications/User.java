@@ -1,7 +1,7 @@
 package com.applications;
 
 /**
- * User class
+ * User class.
  * @author GTA
  */
 public class User {

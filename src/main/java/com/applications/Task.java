@@ -1,7 +1,7 @@
 package com.applications;
 
 /**
- * Task class
+ * Task class.
  * @author GTA
  *
  */
