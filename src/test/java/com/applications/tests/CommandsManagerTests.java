@@ -1,22 +1,31 @@
-package com.applications;
+package com.applications.tests;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.applications.CommandsManager;
+import com.applications.TasksManager;
+import com.applications.User;
+import com.applications.UsersManager;
+import com.applications.Utils;
+
 /**
- * Utils test class.
+ * Commands manager test class.
  * @author GTA
  *
  */
 @RunWith(value = Parameterized.class)
-public class UtilsTests {
+public class CommandsManagerTests {
+    /**
+     * Commands manager.
+     */
+    private transient CommandsManager commandsManager;
     /**
      * Users manager.
      */
@@ -28,7 +37,7 @@ public class UtilsTests {
     
     private transient String command;
 
-    public UtilsTests(String command) {
+    public CommandsManagerTests(String command) {
         this.command = command;
     }
     
@@ -39,25 +48,27 @@ public class UtilsTests {
             {"addtask"},
             {"showusers"},
             {"showtasks"},
+            {"history"},
             {"help"},
             {"not exist"},
-            {"exit"},
+            {"exit"}
         });
     }
-    
+
     @Before
     public void beforeTests() {
+        commandsManager = new CommandsManager(new User("Test"));
         usersManager = new UsersManager();
         tasksManager = new TasksManager();
         Utils.inTest = true;
-        usersManager.deleteUsersFile();
-        tasksManager.deleteTasksFile();
     }
 
     @Test
     public void handleCommand() {
         Utils.responseSubstitute = command;
-        User user = new User("Admin");
-        Utils.handleCommands(usersManager, tasksManager, user);
+        
+        commandsManager = new CommandsManager(new User("Test"));
+        commandsManager.handleCommands(usersManager, tasksManager);
     }
+
 }

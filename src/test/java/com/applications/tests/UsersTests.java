@@ -1,7 +1,9 @@
-package com.applications;
+package com.applications.tests;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.applications.User;
 
 /**
  * Users tests class.
@@ -9,7 +11,7 @@ import org.junit.Test;
  */
 public class UsersTests {
     @Test
-    public void adminExists() {
+    public void user() {
         User user = new User("kevin");
         
         user.getType();

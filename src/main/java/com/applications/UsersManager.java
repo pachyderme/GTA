@@ -1,13 +1,6 @@
 package com.applications;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * User manager class.
@@ -23,27 +16,7 @@ public class UsersManager {
      * @return
      */
     public ArrayList<String> getUsersFromFile() {
-        ArrayList<String> results = new ArrayList<String>();
-
-        createUsersFileIsNotExists();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE_PATH));
-            try {
-                String line = reader.readLine();
-                while (line != null) {
-                    results.addAll(Arrays.asList(line.split(",")));
-                    line = reader.readLine();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                reader.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return results;
+        return FilesManager.readFile(USERS_FILE_PATH);
     }
 
     /**
@@ -87,31 +60,7 @@ public class UsersManager {
      * @param users
      */
     public void saveUsersInFile(ArrayList<String> users) {
-        try {
-            FileOutputStream fos = new FileOutputStream(USERS_FILE_PATH);
-
-            try {
-                byte[] outputResult = String.join(",", users).getBytes();
-                fos.write(outputResult);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (fos != null) {
-                        fos.flush();
-                        fos.close();
-                    } else {
-                        Utils.logMessage("fileOutPutStream déjà vide");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FilesManager.saveItemsInFile(USERS_FILE_PATH, users);
     }
 
     /**
@@ -120,8 +69,7 @@ public class UsersManager {
      * @return boolean
      */
     public boolean deleteUsersFile() {
-        File file = new File(USERS_FILE_PATH);
-        return file.delete();
+        return FilesManager.deleteFile(USERS_FILE_PATH);
     }
 
     /**
@@ -130,25 +78,14 @@ public class UsersManager {
      * @return boolean
      */
     public boolean usersFileExists() {
-        File file = new File(USERS_FILE_PATH);
-        return file.exists();
+        return FilesManager.fileExists(USERS_FILE_PATH);
     }
 
     /**
      * Create user file if the users file not exists.
      */
     public void createUsersFileIsNotExists() {
-        if (!usersFileExists()) {
-            Utils.logMessage("Création du fichier " + USERS_FILE_PATH);
-
-            File file = new File(USERS_FILE_PATH);
-            file.getParentFile().mkdirs();
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        FilesManager.createFileIsNotExists(USERS_FILE_PATH);
     }
 
     /**

@@ -17,9 +17,9 @@ public class Application {
     public static void main(String[] args) {
         usersManager = new UsersManager();
         tasksManager = new TasksManager();
-        while (true) {
-            User user = usersManager.getUserAccount();
-            Utils.handleCommands(usersManager, tasksManager, user);
-        }
+        User loggedUser = usersManager.getUserAccount();
+        
+        CommandsManager commandsManager = new CommandsManager(loggedUser);
+        commandsManager.handleCommands(usersManager, tasksManager);
     }
 }
