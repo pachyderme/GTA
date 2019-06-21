@@ -9,6 +9,7 @@ import com.applications.commands.Command;
 import com.applications.commands.ExitCommand;
 import com.applications.commands.HelpCommand;
 import com.applications.commands.HistoryCommand;
+import com.applications.commands.AssignTaskCommand;
 import com.applications.commands.ShowTasksCommand;
 import com.applications.commands.ShowUsersCommand;
 import com.applications.commands.UnknownCommand;
@@ -35,6 +36,7 @@ public class CommandsManager {
         commands.add(new AddTaskCommand(loggedUser));
         commands.add(new ShowUsersCommand(loggedUser));
         commands.add(new ShowTasksCommand(loggedUser));
+        commands.add(new AssignTaskCommand(loggedUser));
         commands.add(new HistoryCommand(loggedUser));
         commands.add(exitCommand);
     }

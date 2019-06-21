@@ -31,13 +31,18 @@ public class ShowTasksCommand extends Command {
     public void execute() {
         super.execute();
 
+        action();
+    }
+    
+    public void action() {
         TasksManager usersManager = new TasksManager();
         ArrayList<Task> tasks = usersManager.getTasksFromFile();
         Utils.displayMessage("Liste des tâches :");
 
         Iterator<Task> it = tasks.iterator();
         while (it.hasNext()) {
-            Utils.displayMessage(" - " + it.next().getName());
+            Task task = it.next();
+            Utils.displayMessage(" - " + task.id + ". " + task.name + " (assignée à " + task.assignedUser + ")");
         }
     }
 

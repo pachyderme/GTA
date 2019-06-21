@@ -94,10 +94,10 @@ public class TasksManager {
         ArrayList<Task> tasks = getTasksFromFile();
         int id;
         if (tasks.isEmpty()) {
-            id = 0;
+            id = 1;
         } else {
             Task lastTask = tasks.get(tasks.size() - 1);
-            id = lastTask.id;
+            id = lastTask.id + 1;
         }
         Task task = new Task(id, name);
         tasks.add(task);
