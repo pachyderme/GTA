@@ -5,7 +5,7 @@ package com.applications;
  * @author GTA
  */
 public class User extends Entity {
-    public String type;
+    private String type;
 
     public User(String nameSelected) {
         setName(nameSelected);

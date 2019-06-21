@@ -11,8 +11,24 @@ public class LogsManager {
 
     private static final String BEGIN_LOG_FILE_PATH = "data/logs/";
 
-    protected transient User loggedUser;
-    protected transient String path;
+    private transient User loggedUser;
+    private transient String path;
+
+    public User getLoggedUser() {
+        return loggedUser;
+    }
+
+    public void setLoggedUser(User loggedUser) {
+        this.loggedUser = loggedUser;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     /**
      * Constructor.

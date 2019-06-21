@@ -17,8 +17,8 @@ public class AddTaskCommand extends Command {
     public AddTaskCommand(User loggedUser) {
         super(loggedUser);
         
-        name = "addtask";
-        description = "Création d'une tâche.";
+        setName("addtask");
+        setDescription("Création d'une tâche.");
     }
     
     /**

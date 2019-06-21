@@ -16,15 +16,15 @@ public class HelpCommand extends Command {
     public HelpCommand(User loggedUser) {
         super(loggedUser);
         
-        name = "help";
-        description = "Affichage de la liste des commandes disponibles.";
+        setName("help");
+        setDescription("Affichage de la liste des commandes disponibles.");
     }
 
     /**
      * Action executed.
      */
     public void action() {
-        CommandsManager commandsManager = new CommandsManager(this.loggedUser);
+        CommandsManager commandsManager = new CommandsManager(getLoggedUser());
         commandsManager.showCommands();
     }
 

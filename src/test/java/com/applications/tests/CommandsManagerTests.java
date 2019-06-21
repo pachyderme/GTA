@@ -26,15 +26,6 @@ public class CommandsManagerTests {
      * Commands manager.
      */
     private transient CommandsManager commandsManager;
-    /**
-     * Users manager.
-     */
-    private transient UsersManager usersManager;
-    /**
-     * Tasks manager.
-     */
-    private transient TasksManager tasksManager;
-    
     private transient String command;
 
     public CommandsManagerTests(String command) {
@@ -60,14 +51,14 @@ public class CommandsManagerTests {
     @Before
     public void beforeTests() {
         commandsManager = new CommandsManager(new User("Test"));
-        usersManager = new UsersManager();
-        tasksManager = new TasksManager();
-        Utils.inTest = true;
+        new UsersManager();
+        new TasksManager();
+        Utils.setInTest(true);
     }
 
     @Test
     public void handleCommand() {
-        Utils.responseSubstitute = command;
+        Utils.setResponseSubstitute(command);
         
         commandsManager = new CommandsManager(new User("Test"));
         commandsManager.handleCommands();

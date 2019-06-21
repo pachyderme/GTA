@@ -18,7 +18,7 @@ import java.util.Iterator;
  */
 public class FilesManager {
 
-    public static ArrayList<String> readFile (String path) {
+    public static ArrayList<String> readFile(String path) {
         ArrayList<String> results = new ArrayList<String>();
 
         createFileIsNotExists(path);

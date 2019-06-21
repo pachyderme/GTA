@@ -21,15 +21,15 @@ public class AssignTaskCommand extends Command {
     public AssignTaskCommand(User loggedUser) {
         super(loggedUser);
 
-        name = "assigntask";
-        description = "Assignation à une tâche.";
+        setName("assigntask");
+        setDescription("Assignation à une tâche.");
     }
     
     /**
      * Action executed.
      */
     public void action() {
-        ShowTasksCommand showTasksCommand = new ShowTasksCommand(loggedUser);
+        ShowTasksCommand showTasksCommand = new ShowTasksCommand(getLoggedUser());
         TasksManager tasksManager = new TasksManager();
         
         showTasksCommand.action();
@@ -41,7 +41,7 @@ public class AssignTaskCommand extends Command {
             Task task = tasksManager.getTask(tasks, id);
             
             if (task != null) {
-                task.setAssignedUser(loggedUser.getName());
+                task.setAssignedUser(getLoggedUser().getName());
                 tasksManager.saveTasksInFile(tasks);
                 Utils.displayMessage("Tâche assignée.");
             } else {

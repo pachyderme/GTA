@@ -16,8 +16,8 @@ public class ExitCommand extends Command {
     public ExitCommand(User loggedUser) {
         super(loggedUser);
         
-        name = "exit";
-        description = "Fermeture du programme.";
+        setName("exit");
+        setDescription("Fermeture du programme.");
     }
 
     /**

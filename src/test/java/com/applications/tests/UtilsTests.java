@@ -24,7 +24,7 @@ public class UtilsTests {
     public void beforeTests() {
         usersManager = new UsersManager();
         tasksManager = new TasksManager();
-        Utils.inTest = true;
+        Utils.setInTest(true);
         usersManager.deleteUsersFile();
         tasksManager.deleteTasksFile();
     }

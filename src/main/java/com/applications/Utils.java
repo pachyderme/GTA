@@ -11,8 +11,8 @@ import static java.lang.System.out;
  * @author GTA
  */
 public class Utils {
-    public static boolean inTest = false;
-    public static String responseSubstitute = "";
+    private static boolean inTest = false;
+    private static String responseSubstitute = "";
 
     /**
      * Get the user response from command line.
@@ -53,5 +53,21 @@ public class Utils {
      */
     public static void logMessage(String message) {
         out.println("[" + message + "]");
+    }
+
+    public static boolean isInTest() {
+        return inTest;
+    }
+
+    public static void setInTest(boolean inTest) {
+        Utils.inTest = inTest;
+    }
+
+    public static String getResponseSubstitute() {
+        return responseSubstitute;
+    }
+
+    public static void setResponseSubstitute(String responseSubstitute) {
+        Utils.responseSubstitute = responseSubstitute;
     }
 }

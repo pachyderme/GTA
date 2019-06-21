@@ -20,15 +20,15 @@ public class AddTimeToTaskCommand  extends Command {
     public AddTimeToTaskCommand(User loggedTask) {
         super(loggedTask);
         
-        name = "addtime";
-        description = "Ajoute du temps à une tâche.";
+        setName("addtime");
+        setDescription("Ajoute du temps à une tâche.");
     }
     
     /**
      * Action executed.
      */
     public void action() {
-        ShowTasksCommand showTasksCommand = new ShowTasksCommand(loggedUser);
+        ShowTasksCommand showTasksCommand = new ShowTasksCommand(getLoggedUser());
         TasksManager tasksManager = new TasksManager();
         
         showTasksCommand.action();
