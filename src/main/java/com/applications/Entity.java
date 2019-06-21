@@ -5,7 +5,7 @@ package com.applications;
  * @author pierr
  *
  */
-public abstract class Entity {
+public class Entity {
     public String name;
     public int id;
     
