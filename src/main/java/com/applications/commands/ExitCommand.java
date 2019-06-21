@@ -11,6 +11,7 @@ import com.applications.Utils;
 public class ExitCommand extends Command {
     /**
      * Constructor.
+     * @param loggedTask
      */
     public ExitCommand(User loggedUser) {
         super(loggedUser);
@@ -20,11 +21,9 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Execute the command.
+     * Action executed.
      */
-    public void execute() {
-        super.execute();
-        
+    public void action() {
         Utils.displayMessage("Fermeture du programme.");
     }
 }

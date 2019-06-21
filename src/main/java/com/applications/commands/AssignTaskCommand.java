@@ -14,7 +14,10 @@ import com.applications.Utils;
  *
  */
 public class AssignTaskCommand extends Command {
-
+    /**
+     * Constructor.
+     * @param loggedTask
+     */
     public AssignTaskCommand(User loggedUser) {
         super(loggedUser);
 
@@ -22,7 +25,10 @@ public class AssignTaskCommand extends Command {
         description = "Assignation à une tâche.";
     }
     
-    public void execute() {
+    /**
+     * Action executed.
+     */
+    public void action() {
         ShowTasksCommand showTasksCommand = new ShowTasksCommand(loggedUser);
         TasksManager tasksManager = new TasksManager();
         
@@ -45,6 +51,4 @@ public class AssignTaskCommand extends Command {
             Utils.displayMessage(str + " n'est pas une valeur correcte.");
         }
     }
-
-    
 }

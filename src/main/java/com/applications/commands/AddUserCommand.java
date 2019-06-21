@@ -12,6 +12,7 @@ import com.applications.Utils;
 public class AddUserCommand extends Command {
     /**
      * Constructor.
+     * @param loggedTask
      */
     public AddUserCommand(User loggedUser) {
         super(loggedUser);
@@ -19,13 +20,11 @@ public class AddUserCommand extends Command {
         name = "adduser";
         description = "Création d'un utilisateur.";
     }
-
+    
     /**
-     * Execute the command.
+     * Action executed.
      */
-    public void execute() {
-        super.execute();
-        
+    public void action() {
         Utils.displayMessage("Nom de l'utilisateur : ");
         UsersManager usersManager = new UsersManager();
         String userName = Utils.getUserResponse();        

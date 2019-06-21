@@ -15,6 +15,7 @@ import com.applications.Utils;
 public class HistoryCommand extends Command {
     /**
      * Constructor.
+     * @param loggedTask
      */
     public HistoryCommand(User loggedUser) {
         super(loggedUser);
@@ -24,11 +25,9 @@ public class HistoryCommand extends Command {
     }
 
     /**
-     * Execute the command.
+     * Action executed.
      */
-    public void execute() {
-        super.execute();
-
+    public void action() {
         LogsManager logsManager = new LogsManager(loggedUser);
         ArrayList<String> logs = logsManager.getLogsFromFile();
         

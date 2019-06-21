@@ -26,14 +26,8 @@ public class ShowTasksCommand extends Command {
     }
 
     /**
-     * Execute the command.
+     * Action executed.
      */
-    public void execute() {
-        super.execute();
-
-        action();
-    }
-    
     public void action() {
         TasksManager usersManager = new TasksManager();
         ArrayList<Task> tasks = usersManager.getTasksFromFile();

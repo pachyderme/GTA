@@ -11,6 +11,7 @@ import com.applications.User;
 public class HelpCommand extends Command {
     /**
      * Constructor.
+     * @param loggedTask
      */
     public HelpCommand(User loggedUser) {
         super(loggedUser);
@@ -20,11 +21,9 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Execute the command.
+     * Action executed.
      */
-    public void execute() {
-        super.execute();
-        
+    public void action() {
         CommandsManager commandsManager = new CommandsManager(this.loggedUser);
         commandsManager.showCommands();
     }

@@ -11,6 +11,7 @@ import com.applications.Utils;
 public class UnknownCommand extends Command {
     /**
      * Constructor.
+     * @param loggedTask
      */
     public UnknownCommand(User loggedUser, String name) {
         super(loggedUser);
@@ -20,11 +21,9 @@ public class UnknownCommand extends Command {
     }
 
     /**
-     * Execute the command.
+     * Action executed.
      */
-    public void execute() {
-        super.execute();
-
+    public void action() {
         Utils.displayMessage(
                 "Commande inconnue. Tapez \"help\"" +
                 " pour voir la liste des commandes disponibles.");

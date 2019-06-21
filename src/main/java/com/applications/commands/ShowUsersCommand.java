@@ -15,6 +15,7 @@ import com.applications.Utils;
 public class ShowUsersCommand extends Command {
     /**
      * Constructor.
+     * @param loggedTask
      */
     public ShowUsersCommand(User loggedUser) {
         super(loggedUser);
@@ -24,11 +25,9 @@ public class ShowUsersCommand extends Command {
     }
 
     /**
-     * Execute the command.
+     * Action executed.
      */
-    public void execute() {
-        super.execute();
-
+    public void action() {
         UsersManager usersManager = new UsersManager();
         ArrayList<String> users = usersManager.getUsersFromFile();
         Utils.displayMessage("Liste des utilisateurs :");

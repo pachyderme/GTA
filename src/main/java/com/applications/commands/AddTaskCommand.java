@@ -12,6 +12,7 @@ import com.applications.Utils;
 public class AddTaskCommand extends Command {
     /**
      * Constructor.
+     * @param loggedTask
      */
     public AddTaskCommand(User loggedUser) {
         super(loggedUser);
@@ -19,13 +20,11 @@ public class AddTaskCommand extends Command {
         name = "addtask";
         description = "Création d'une tâche.";
     }
-
+    
     /**
-     * Execute the command.
+     * Action executed.
      */
-    public void execute() {
-        super.execute();
-        
+    public void action() {
         Utils.displayMessage("Nom de la tâche : ");
         TasksManager tasksManager = new TasksManager();
         String taskName = Utils.getUserResponse();        
