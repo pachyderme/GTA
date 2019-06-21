@@ -94,12 +94,10 @@ public class UsersManagerTests {
         usersManager.deleteUsersFile();
 
         usersManager.createUser("Pierre");
-        usersManager.createUser("Paul");
-        usersManager.createUser("Jacques");
 
         ArrayList<String> users = usersManager.getUsersFromFile();
 
-        Assert.assertEquals(users.size(), 3);
+        Assert.assertEquals(users.size(), 1);
     }
 
     @Test

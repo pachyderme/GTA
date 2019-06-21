@@ -11,7 +11,7 @@ import com.applications.User;
 import com.applications.Utils;
 
 /**
- * Logs manager tests
+ * Logs manager tests.
  * @author kevin
  *
  */
