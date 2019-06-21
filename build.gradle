@@ -1,10 +1,12 @@
-// plugins {
-//		id 'java'
-//		id 'war'
-//		id 'application'
-//		id 'jacoco'
-//		id 'checkstyle'
-// }
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+    dependencies {
+    	classpath 'de.aaschmid:gradle-cpd-plugin:2.0'
+    }
+}
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -13,18 +15,20 @@ apply plugin: 'checkstyle'
 apply plugin: 'pmd'
 apply plugin: 'jdepend'
 apply plugin: 'findbugs'
+apply plugin: 'cpd'
+
+repositories {
+	mavenCentral()
+}
+	
+dependencies {
+     testImplementation("junit:junit:4.12")
+}
+
 
 javadoc {
 	source = sourceSets.main.allJava
 	classpath = configurations.compile
-}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation("junit:junit:4.12")
 }
 
 findbugs {
@@ -48,4 +52,13 @@ tasks.withType(FindBugs) {
         xml.enabled = true
         html.enabled = false
     }
+}
+
+cpdCheck {
+    reports {
+        text.enabled = false
+        xml.enabled = true
+    }
+    ignoreFailures = true
+    source = sourceSets.main.allJava // only java, groovy and scala classes in 'main' sourceSets
 }
