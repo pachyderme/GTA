@@ -6,9 +6,7 @@ package com.applications;
  * @author GTA
  *
  */
-public class Task {
-    public String name;
-    public int id;
+public class Task extends Entity {
     public String assignedUser = "Admin";
     public int time = 0;
 
@@ -36,22 +34,6 @@ public class Task {
         name = nameSelected;
         assignedUser = assignedUserSelected;
         time = timeSelected;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getAssignedUser() {

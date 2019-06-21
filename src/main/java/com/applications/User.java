@@ -4,10 +4,8 @@ package com.applications;
  * User class.
  * @author GTA
  */
-public class User {
+public class User extends Entity {
     public String type;
-    public String name;
-    public int id;
 
     public User(String nameSelected) {
         name = nameSelected;
@@ -19,22 +17,6 @@ public class User {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override
