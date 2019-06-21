@@ -1,7 +1,7 @@
 package com.applications.commands;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import com.applications.Task;
 import com.applications.TasksManager;
@@ -30,7 +30,7 @@ public class ShowTasksCommand extends Command {
      */
     public void action() {
         TasksManager usersManager = new TasksManager();
-        ArrayList<Task> tasks = usersManager.getTasksFromFile();
+        List<Task> tasks = usersManager.getTasksFromFile();
         Utils.displayMessage("Liste des tâches :");
 
         Iterator<Task> it = tasks.iterator();

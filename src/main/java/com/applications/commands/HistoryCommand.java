@@ -1,7 +1,7 @@
 package com.applications.commands;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import com.applications.LogsManager;
 import com.applications.User;
@@ -29,7 +29,7 @@ public class HistoryCommand extends Command {
      */
     public void action() {
         LogsManager logsManager = new LogsManager(loggedUser);
-        ArrayList<String> logs = logsManager.getLogsFromFile();
+        List<String> logs = logsManager.getLogsFromFile();
         
         Utils.displayMessage("Historique des commandes :");
 

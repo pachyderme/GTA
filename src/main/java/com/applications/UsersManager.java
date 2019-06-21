@@ -1,6 +1,7 @@
 package com.applications;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User manager class.
@@ -15,7 +16,7 @@ public class UsersManager {
      * 
      * @return
      */
-    public ArrayList<String> getUsersFromFile() {
+    public List<String> getUsersFromFile() {
         return FilesManager.readFile(USERS_FILE_PATH);
     }
 
@@ -36,7 +37,7 @@ public class UsersManager {
      * @return boolean
      */
     public boolean userExists(User user) {
-        ArrayList<String> users = getUsersFromFile();
+        List<String> users = getUsersFromFile();
         return users.contains(user.getName());
     }
 
@@ -45,7 +46,7 @@ public class UsersManager {
      */
     public void createAdminIfNotExists() {
         if (!adminExists()) {
-            ArrayList<String> users = getUsersFromFile();
+            List<String> users = getUsersFromFile();
             users.add("Admin");
 
             saveUsersInFile(users);
@@ -59,7 +60,7 @@ public class UsersManager {
      * 
      * @param users
      */
-    public void saveUsersInFile(ArrayList<String> users) {
+    public void saveUsersInFile(List<String> users) {
         FilesManager.saveItemsInFile(USERS_FILE_PATH, users);
     }
 
@@ -94,7 +95,7 @@ public class UsersManager {
      * @param name
      */
     public void createUser(String name) {
-        ArrayList<String> users = getUsersFromFile();
+        List<String> users = getUsersFromFile();
         users.add(name);
 
         saveUsersInFile(users);

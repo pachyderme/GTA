@@ -1,6 +1,6 @@
 package com.applications.tests;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,7 +32,7 @@ public class LogsManagerTests {
     public void logsEmpty() {
         logsManager.deleteLogsFile();
 
-        ArrayList<String> logs = logsManager.getLogsFromFile();
+        List<String> logs = logsManager.getLogsFromFile();
 
         Assert.assertTrue(logs.isEmpty());
     }
@@ -43,7 +43,7 @@ public class LogsManagerTests {
 
         logsManager.addLog("un log");
 
-        ArrayList<String> logs = logsManager.getLogsFromFile();
+        List<String> logs = logsManager.getLogsFromFile();
 
         Assert.assertFalse(logs.isEmpty());
     }

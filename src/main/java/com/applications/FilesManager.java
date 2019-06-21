@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Files manager class.
@@ -18,7 +19,7 @@ import java.util.Iterator;
  */
 public class FilesManager {
 
-    public static ArrayList<String> readFile (String path) {
+    public static List<String> readFile (String path) {
         ArrayList<String> results = new ArrayList<String>();
 
         createFileIsNotExists(path);
@@ -31,12 +32,12 @@ public class FilesManager {
                     line = reader.readLine();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                Utils.logMessage(e.toString());
             } finally {
                 reader.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Utils.logMessage(e.toString());
         }
 
         return results;
@@ -48,26 +49,26 @@ public class FilesManager {
      * 
      * @param users
      */
-    public static <T> void saveItemsInFile(String path, ArrayList<T> items) {
+    public static <T> void saveItemsInFile(String path, List<T> items) {
         try {
             FileOutputStream fos = new FileOutputStream(path);
 
             try {
-                Iterator<T> it = items.iterator();
-                while (it.hasNext()) {
-                    Object item = it.next();
+                Iterator<T> iterator = items.iterator();
+                while (iterator.hasNext()) {
+                    Object item = iterator.next();
                     byte[] outputResult = item.toString().getBytes(StandardCharsets.UTF_8);
                     fos.write(outputResult);
 
-                    if (it.hasNext()) {                        
+                    if (iterator.hasNext()) {                        
                         byte[] separator = ";".getBytes(StandardCharsets.UTF_8);
                         fos.write(separator);
                     }
                 }
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                Utils.logMessage(e.toString());
             } catch (IOException e) {
-                e.printStackTrace();
+                Utils.logMessage(e.toString());
             } finally {
                 try {
                     if (fos != null) {
@@ -77,11 +78,11 @@ public class FilesManager {
                         Utils.logMessage("fileOutPutStream déjà vide");
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Utils.logMessage(e.toString());
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Utils.logMessage(e.toString());
         }
     }
 
@@ -114,7 +115,7 @@ public class FilesManager {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                Utils.logMessage(e.toString());
             }
         }
     }

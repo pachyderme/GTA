@@ -20,9 +20,9 @@ public class TasksManager {
      * 
      * @return tasks
      */
-    public ArrayList<Task> getTasksFromFile() {
-        ArrayList<String> names = FilesManager.readFile(TASKS_FILE_PATH);
-        ArrayList<Task> results = new ArrayList<Task>();
+    public List<Task> getTasksFromFile() {
+        List<String> names = FilesManager.readFile(TASKS_FILE_PATH);
+        List<Task> results = new ArrayList<Task>();
         
         Iterator<String> it = names.iterator();
         while (it.hasNext()) {
@@ -53,7 +53,7 @@ public class TasksManager {
      * @param task
      * @return boolean
      */
-    public boolean taskExists(ArrayList<Task> tasks, Task task) {
+    public boolean taskExists(List<Task> tasks, Task task) {
         boolean results = false;
         Iterator<Task> it = tasks.iterator();
         while (it.hasNext() && !results) {
@@ -69,7 +69,7 @@ public class TasksManager {
      * @param id
      * @return task
      */
-    public Task getTask(ArrayList<Task> tasks, int id) {
+    public Task getTask(List<Task> tasks, int id) {
         Iterator<Task> it = tasks.iterator();
         while (it.hasNext()) {
             Task task = it.next();
@@ -86,7 +86,7 @@ public class TasksManager {
      * 
      * @param tasks
      */
-    public void saveTasksInFile(ArrayList<Task> tasks) {
+    public void saveTasksInFile(List<Task> tasks) {
         FilesManager.saveItemsInFile(TASKS_FILE_PATH, tasks);
     }
 
@@ -121,7 +121,7 @@ public class TasksManager {
      * @param name
      */
     public Task createTask(String name) {
-        ArrayList<Task> tasks = getTasksFromFile();
+        List<Task> tasks = getTasksFromFile();
         int id;
         if (tasks.isEmpty()) {
             id = 1;

@@ -23,7 +23,7 @@ import com.applications.commands.UnknownCommand;
  */
 public class CommandsManager {
 
-    private transient ArrayList<Command> commands;
+    private transient List<Command> commands;
     private transient ExitCommand exitCommand;
     private transient User loggedUser;
     
@@ -93,7 +93,7 @@ public class CommandsManager {
         Utils.displayMessage("");
     }
 
-    public ArrayList<Command> getCommands() {
+    public List<Command> getCommands() {
         return commands;
     }
 

@@ -1,7 +1,7 @@
 package com.applications.commands;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import com.applications.User;
 import com.applications.UsersManager;
@@ -29,7 +29,7 @@ public class ShowUsersCommand extends Command {
      */
     public void action() {
         UsersManager usersManager = new UsersManager();
-        ArrayList<String> users = usersManager.getUsersFromFile();
+        List<String> users = usersManager.getUsersFromFile();
         Utils.displayMessage("Liste des utilisateurs :");
 
         Iterator<String> it = users.iterator();

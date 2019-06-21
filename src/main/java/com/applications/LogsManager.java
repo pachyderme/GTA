@@ -1,6 +1,6 @@
 package com.applications;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Logs manager class.
@@ -28,12 +28,12 @@ public class LogsManager {
      * 
      * @return logs
      */
-    public ArrayList<String> getLogsFromFile() {
+    public List<String> getLogsFromFile() {
         return FilesManager.readFile(path);
     }
     
     public void addLog(String name) {
-        ArrayList<String> logs = getLogsFromFile();
+        List<String> logs = getLogsFromFile();
         logs.add(name);
         saveLogsInFile(logs);
     }
@@ -44,7 +44,7 @@ public class LogsManager {
      * @return boolean
      */
     public boolean taskExists(Task task) {
-        ArrayList<String> logs = getLogsFromFile();
+        List<String> logs = getLogsFromFile();
         return logs.contains(task.getName());
     }
 
@@ -53,7 +53,7 @@ public class LogsManager {
      * 
      * @param logs
      */
-    public void saveLogsInFile(ArrayList<String> logs) {
+    public void saveLogsInFile(List<String> logs) {
         FilesManager.saveItemsInFile(path, logs);
     }
 
@@ -87,7 +87,7 @@ public class LogsManager {
      * @param name
      */
     public void createTask(String name) {
-        ArrayList<String> logs = getLogsFromFile();
+        List<String> logs = getLogsFromFile();
         logs.add(name);
 
         saveLogsInFile(logs);

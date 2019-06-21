@@ -1,6 +1,6 @@
 package com.applications.tests;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -73,7 +73,7 @@ public class UsersManagerTests {
     public void getUsersEmpty() {
         usersManager.deleteUsersFile();
 
-        ArrayList<String> users = usersManager.getUsersFromFile();
+        List<String> users = usersManager.getUsersFromFile();
 
         Assert.assertTrue(users.isEmpty());
     }
@@ -84,7 +84,7 @@ public class UsersManagerTests {
 
         usersManager.createAdminIfNotExists();
 
-        ArrayList<String> users = usersManager.getUsersFromFile();
+        List<String> users = usersManager.getUsersFromFile();
 
         Assert.assertFalse(users.isEmpty());
     }
@@ -95,7 +95,7 @@ public class UsersManagerTests {
 
         usersManager.createUser("Pierre");
 
-        ArrayList<String> users = usersManager.getUsersFromFile();
+        List<String> users = usersManager.getUsersFromFile();
 
         Assert.assertEquals(users.size(), 1);
     }

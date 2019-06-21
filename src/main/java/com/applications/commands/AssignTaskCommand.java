@@ -1,6 +1,6 @@
 package com.applications.commands;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.applications.Task;
 import com.applications.TasksManager;
@@ -35,7 +35,7 @@ public class AssignTaskCommand extends Command {
         showTasksCommand.action();
         Utils.displayMessage("ID de la tâche : ");
         String str = Utils.getUserResponse();
-        ArrayList<Task> tasks = tasksManager.getTasksFromFile();
+        List<Task> tasks = tasksManager.getTasksFromFile();
         try {
             int id = Integer.parseInt(str);
             Task task = tasksManager.getTask(tasks, id);
