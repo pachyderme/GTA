@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class FilesManager {
 
-    public static List<String> readFile (String path) {
+    public static List<String> readFile(String path) {
         ArrayList<String> results = new ArrayList<String>();
 
         createFileIsNotExists(path);
