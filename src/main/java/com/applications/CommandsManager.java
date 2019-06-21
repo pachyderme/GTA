@@ -23,9 +23,9 @@ import com.applications.commands.UnknownCommand;
  */
 public class CommandsManager {
 
-    protected transient List<Command> commands;
-    protected transient ExitCommand exitCommand;
-    protected transient User loggedUser;
+    private transient ArrayList<Command> commands;
+    private transient ExitCommand exitCommand;
+    private transient User loggedUser;
     
     public CommandsManager(User loggedUser) {
         this.loggedUser = loggedUser;
@@ -91,5 +91,29 @@ public class CommandsManager {
             Utils.displayMessage(" - " + command.getName() + ": " + command.getDescription());
         }
         Utils.displayMessage("");
+    }
+
+    public ArrayList<Command> getCommands() {
+        return commands;
+    }
+
+    public void setCommands(ArrayList<Command> commands) {
+        this.commands = commands;
+    }
+
+    public ExitCommand getExitCommand() {
+        return exitCommand;
+    }
+
+    public void setExitCommand(ExitCommand exitCommand) {
+        this.exitCommand = exitCommand;
+    }
+
+    public User getLoggedUser() {
+        return loggedUser;
+    }
+
+    public void setLoggedUser(User loggedUser) {
+        this.loggedUser = loggedUser;
     }
 }

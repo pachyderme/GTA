@@ -41,7 +41,7 @@ public class AssignTaskCommand extends Command {
             Task task = tasksManager.getTask(tasks, id);
             
             if (task != null) {
-                task.assignedUser = loggedUser.name;
+                task.setAssignedUser(loggedUser.getName());
                 tasksManager.saveTasksInFile(tasks);
                 Utils.displayMessage("Tâche assignée.");
             } else {

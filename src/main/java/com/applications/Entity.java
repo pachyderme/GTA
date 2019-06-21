@@ -6,8 +6,8 @@ package com.applications;
  *
  */
 public class Entity {
-    public String name;
-    public int id;
+    private String name;
+    private int id;
     
     public String getName() {
         return name;

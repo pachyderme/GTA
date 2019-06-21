@@ -45,7 +45,7 @@ public class LogsManager {
      */
     public boolean taskExists(Task task) {
         ArrayList<String> logs = getLogsFromFile();
-        return logs.contains(task.name);
+        return logs.contains(task.getName());
     }
 
     /**
