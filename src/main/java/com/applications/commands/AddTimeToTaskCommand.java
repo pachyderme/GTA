@@ -53,7 +53,8 @@ public class AddTimeToTaskCommand  extends Command {
                     
                     task.time += time;
                     tasksManager.saveTasksInFile(tasks);
-                    Utils.displayMessage("Temps ajouté à la tâche. Temps total: " + task.time + "h.");
+                    Utils.displayMessage("Temps ajouté à la tâche. Temps total: "
+                            + task.time + "h.");
                 } catch (NumberFormatException e) {
                     Utils.displayMessage(str + " n'est pas une valeur correcte.");
                 }

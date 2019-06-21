@@ -27,7 +27,11 @@ public class Task {
         assignedUser = assignedUserSelected;
     }
     
-    public Task(int idSelected, String nameSelected, String assignedUserSelected, int timeSelected) {
+    public Task(
+            int idSelected, 
+            String nameSelected, 
+            String assignedUserSelected, 
+            int timeSelected) {
         id = idSelected;
         name = nameSelected;
         assignedUser = assignedUserSelected;
