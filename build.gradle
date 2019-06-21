@@ -36,21 +36,31 @@ findbugs {
 }
 
 checkstyle {
-    toolVersion "7.6.1"
-}
-
-checkstyleMain {
-    source ='src/main/java'
-}
-
-checkstyleTest {
-    source ='src/test/java'
+    checkstyleTest.enabled = false
+    ignoreFailures = true
+    showViolations = true
+    configFile file("checkstyle_rules_lvl1.xml")
 }
 
 tasks.withType(FindBugs) {
     reports {
         xml.enabled = true
         html.enabled = false
+    }
+}
+
+pmd {
+    pmdTest.enabled = false
+    toolVersion = '6.8.0'
+    ruleSetFiles = files("pmd_rules_lvl1.xml")
+
+    ignoreFailures = true
+}
+
+tasks.withType(Pmd) {
+    reports {
+        xml.enabled true
+        html.enabled true
     }
 }
 
