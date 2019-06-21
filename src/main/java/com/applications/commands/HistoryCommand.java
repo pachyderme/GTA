@@ -20,15 +20,15 @@ public class HistoryCommand extends Command {
     public HistoryCommand(User loggedUser) {
         super(loggedUser);
         
-        name = "history";
-        description = "Affichage de la liste de l'historique des commandes éxécutées.";
+        setName("history");
+        setDescription("Affichage de la liste de l'historique des commandes éxécutées.");
     }
 
     /**
      * Action executed.
      */
     public void action() {
-        LogsManager logsManager = new LogsManager(loggedUser);
+        LogsManager logsManager = new LogsManager(getLoggedUser());
         List<String> logs = logsManager.getLogsFromFile();
         
         Utils.displayMessage("Historique des commandes :");

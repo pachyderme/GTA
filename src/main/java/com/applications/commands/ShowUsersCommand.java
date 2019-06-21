@@ -20,8 +20,8 @@ public class ShowUsersCommand extends Command {
     public ShowUsersCommand(User loggedUser) {
         super(loggedUser);
         
-        name = "showusers";
-        description = "Affichage de la liste des utilisateurs.";
+        setName("showusers");
+        setDescription("Affichage de la liste des utilisateurs.");
     }
 
     /**

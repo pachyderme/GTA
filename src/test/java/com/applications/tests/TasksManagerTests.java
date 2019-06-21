@@ -23,7 +23,7 @@ public class TasksManagerTests {
     public void beforeTests() {
         tasksManager = new TasksManager();
         tasksManager.deleteTasksFile();
-        Utils.inTest = true;
+        Utils.setInTest(true);
     }
 
     @Test

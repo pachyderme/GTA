@@ -16,8 +16,8 @@ public class UnknownCommand extends Command {
     public UnknownCommand(User loggedUser, String name) {
         super(loggedUser);
         
-        this.name = name;
-        this.description = "Commande inconnue.";
+        setName(name);
+        setDescription("Commande inconnue.");
     }
 
     /**
@@ -25,7 +25,7 @@ public class UnknownCommand extends Command {
      */
     public void action() {
         Utils.displayMessage(
-                "Commande inconnue. Tapez \"help\"" +
-                " pour voir la liste des commandes disponibles.");
+                "Commande inconnue. Tapez \"help\"" 
+                + " pour voir la liste des commandes disponibles.");
     }
 }

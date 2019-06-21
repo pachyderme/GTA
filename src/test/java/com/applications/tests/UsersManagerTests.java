@@ -26,7 +26,7 @@ public class UsersManagerTests {
     public void beforeTests() {
         usersManager = new UsersManager();
         usersManager.deleteUsersFile();
-        Utils.inTest = true;
+        Utils.setInTest(true);
     }
 
     @Test
@@ -102,7 +102,7 @@ public class UsersManagerTests {
 
     @Test
     public void getUserAccount() {
-        Utils.responseSubstitute = "Admin";
+        Utils.setResponseSubstitute("Admin");
         usersManager.createAdminIfNotExists();
         User user = usersManager.getUserAccount();
 
@@ -112,6 +112,6 @@ public class UsersManagerTests {
     @After
     public void afterTests() {
         usersManager.deleteUsersFile();
-        Utils.inTest = false;
+        Utils.setInTest(false);
     }
 }

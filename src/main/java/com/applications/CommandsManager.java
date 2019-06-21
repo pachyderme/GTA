@@ -2,8 +2,6 @@ package com.applications;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-
 import com.applications.commands.AddTaskCommand;
 import com.applications.commands.AddTimeToTaskCommand;
 import com.applications.commands.AddUserCommand;
@@ -61,7 +59,7 @@ public class CommandsManager {
             Command matchedCommand = getCommand(commandName);
             matchedCommand.execute();
             
-            if (Utils.inTest) {
+            if (Utils.isInTest()) {
                 commandName = exitCommand.getName();
             }
         }

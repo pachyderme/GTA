@@ -25,7 +25,7 @@ public class LogsManagerTests {
     public void beforeTests() {
         logsManager = new LogsManager(new User("Test"));
         logsManager.deleteLogsFile();
-        Utils.inTest = true;
+        Utils.setInTest(true);
     }
 
     @Test

@@ -21,8 +21,8 @@ public class ShowTasksCommand extends Command {
     public ShowTasksCommand(User loggedTask) {
         super(loggedTask);
         
-        name = "showtasks";
-        description = "Affichage de la liste des tâches.";
+        setName("showtasks");
+        setDescription("Affichage de la liste des tâches.");
     }
 
     /**
@@ -36,8 +36,8 @@ public class ShowTasksCommand extends Command {
         Iterator<Task> it = tasks.iterator();
         while (it.hasNext()) {
             Task task = it.next();
-            Utils.displayMessage(" - " + task.getId() + ". " + task.getName() + 
-                    ", assignée à " + task.getAssignedUser() + " (" + task.getTime() + "h)");
+            Utils.displayMessage(" - " + task.getId() + ". " + task.getName() 
+                + ", assignée à " + task.getAssignedUser() + " (" + task.getTime() + "h)");
         }
     }
 

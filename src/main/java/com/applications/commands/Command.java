@@ -10,9 +10,9 @@ import com.applications.User;
  */
 public abstract class Command {
 
-    protected transient String name;
-    protected transient String description;
-    protected transient User loggedUser;
+    private transient String name;
+    private transient String description;
+    private transient User loggedUser;
 
     /**
      * Constructor.
@@ -47,5 +47,17 @@ public abstract class Command {
 
     public User getLoggedUser() {
         return loggedUser;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setLoggedUser(User loggedUser) {
+        this.loggedUser = loggedUser;
     }
 }

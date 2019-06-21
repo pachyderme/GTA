@@ -17,8 +17,8 @@ public class AddUserCommand extends Command {
     public AddUserCommand(User loggedUser) {
         super(loggedUser);
 
-        name = "adduser";
-        description = "Création d'un utilisateur.";
+        setName("adduser");
+        setDescription("Création d'un utilisateur.");
     }
     
     /**
