@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.applications.commands.AddTaskCommand;
+import com.applications.commands.AddTimeToTaskCommand;
 import com.applications.commands.AddUserCommand;
 import com.applications.commands.Command;
 import com.applications.commands.ExitCommand;
@@ -15,7 +16,7 @@ import com.applications.commands.ShowUsersCommand;
 import com.applications.commands.UnknownCommand;
 
 /**
- * Command class.
+ * Command manager class.
  * @author GTA
  *
  */
@@ -37,6 +38,7 @@ public class CommandsManager {
         commands.add(new ShowUsersCommand(loggedUser));
         commands.add(new ShowTasksCommand(loggedUser));
         commands.add(new AssignTaskCommand(loggedUser));
+        commands.add(new AddTimeToTaskCommand(loggedUser));
         commands.add(new HistoryCommand(loggedUser));
         commands.add(exitCommand);
     }

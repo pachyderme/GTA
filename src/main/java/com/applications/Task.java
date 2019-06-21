@@ -10,6 +10,7 @@ public class Task {
     public String name;
     public int id;
     public String assignedUser = "Admin";
+    public int time = 0;
 
     public Task(String nameSelected) {
         name = nameSelected;
@@ -24,6 +25,13 @@ public class Task {
         id = idSelected;
         name = nameSelected;
         assignedUser = assignedUserSelected;
+    }
+    
+    public Task(int idSelected, String nameSelected, String assignedUserSelected, int timeSelected) {
+        id = idSelected;
+        name = nameSelected;
+        assignedUser = assignedUserSelected;
+        time = timeSelected;
     }
 
     public String getName() {
@@ -42,11 +50,6 @@ public class Task {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return id + "," + name + "," + assignedUser;
-    }
-
     public String getAssignedUser() {
         return assignedUser;
     }
@@ -55,4 +58,16 @@ public class Task {
         this.assignedUser = assignedUser;
     }
 
+    public int getTime() {
+        return id;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + name + "," + assignedUser + "," + time;
+    }
 }

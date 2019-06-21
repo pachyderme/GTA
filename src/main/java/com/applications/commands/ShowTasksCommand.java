@@ -42,7 +42,7 @@ public class ShowTasksCommand extends Command {
         Iterator<Task> it = tasks.iterator();
         while (it.hasNext()) {
             Task task = it.next();
-            Utils.displayMessage(" - " + task.id + ". " + task.name + " (assignée à " + task.assignedUser + ")");
+            Utils.displayMessage(" - " + task.id + ". " + task.name + ", assignée à " + task.assignedUser + " (" + task.time + "h)");
         }
     }
 

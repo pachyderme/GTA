@@ -1,13 +1,18 @@
 package com.applications.commands;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import com.applications.Task;
 import com.applications.TasksManager;
 import com.applications.User;
 import com.applications.Utils;
 
+
+/**
+ * Assign task Command class.
+ * @author GTA
+ *
+ */
 public class AssignTaskCommand extends Command {
 
     public AssignTaskCommand(User loggedUser) {
@@ -23,25 +28,23 @@ public class AssignTaskCommand extends Command {
         
         showTasksCommand.action();
         Utils.displayMessage("ID de la tâche : ");
-        String taskId = Utils.getUserResponse();
+        String str = Utils.getUserResponse();
+        ArrayList<Task> tasks = tasksManager.getTasksFromFile();
         try {
-            Task task = new Task(Integer.parseInt(taskId), "");
-            if (tasksManager.taskExists(task)) {
-                ArrayList<Task> tasks = tasksManager.getTasksFromFile();
-                Iterator<Task> it = tasks.iterator();
-                while (it.hasNext()) {
-                    Task tmpTask = it.next();
-                    if (tmpTask.id == task.id) {
-                        tmpTask.assignedUser = loggedUser.name;
-                    }
-                }
-
+            int id = Integer.parseInt(str);
+            Task task = tasksManager.getTask(tasks, id);
+            
+            if (task != null) {
+                task.assignedUser = loggedUser.name;
                 tasksManager.saveTasksInFile(tasks);
                 Utils.displayMessage("Tâche assignée.");
+            } else {
+                Utils.displayMessage("Cette tâche n'existe pas.");
             }
         } catch (NumberFormatException e) {
-            Utils.displayMessage(taskId + " n'est pas une valeur correcte.");
+            Utils.displayMessage(str + " n'est pas une valeur correcte.");
         }
     }
 
+    
 }
