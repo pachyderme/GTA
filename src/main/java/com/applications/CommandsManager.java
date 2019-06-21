@@ -2,6 +2,7 @@ package com.applications;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import com.applications.commands.AddTaskCommand;
 import com.applications.commands.AddTimeToTaskCommand;
@@ -22,7 +23,7 @@ import com.applications.commands.UnknownCommand;
  */
 public class CommandsManager {
 
-    protected transient ArrayList<Command> commands;
+    protected transient List<Command> commands;
     protected transient ExitCommand exitCommand;
     protected transient User loggedUser;
     
@@ -49,7 +50,7 @@ public class CommandsManager {
      * @param usersManager
      * @param tasksManager
      */
-    public void handleCommands(UsersManager usersManager, TasksManager tasksManager) {
+    public void handleCommands() {
         String commandName;
         showCommands();
         
@@ -68,9 +69,9 @@ public class CommandsManager {
     }
     
     private Command getCommand(String commandName) {
-        Iterator<Command> it = commands.iterator();
-        while (it.hasNext()) {
-            Command command = it.next();
+        Iterator<Command> iterator = commands.iterator();
+        while (iterator.hasNext()) {
+            Command command = iterator.next();
             if (commandName.equals(command.getName())) {
                 return command;
             }
@@ -84,9 +85,9 @@ public class CommandsManager {
      */
     public void showCommands() {
         Utils.displayMessage("Commandes disponibles :");
-        Iterator<Command> it = commands.iterator();
-        while (it.hasNext()) {
-            Command command = it.next();
+        Iterator<Command> iterator = commands.iterator();
+        while (iterator.hasNext()) {
+            Command command = iterator.next();
             Utils.displayMessage(" - " + command.getName() + ": " + command.getDescription());
         }
         Utils.displayMessage("");

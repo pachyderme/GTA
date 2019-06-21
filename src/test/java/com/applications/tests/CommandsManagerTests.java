@@ -70,7 +70,7 @@ public class CommandsManagerTests {
         Utils.responseSubstitute = command;
         
         commandsManager = new CommandsManager(new User("Test"));
-        commandsManager.handleCommands(usersManager, tasksManager);
+        commandsManager.handleCommands();
     }
 
 }
