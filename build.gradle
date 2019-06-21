@@ -12,6 +12,7 @@ apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
 apply plugin: 'jdepend'
+apply plugin: 'findbugs'
 
 javadoc {
 	source = sourceSets.main.allJava
@@ -26,6 +27,10 @@ dependencies {
     testImplementation("junit:junit:4.12")
 }
 
+findbugs {
+  ignoreFailures = true
+}
+
 checkstyle {
     toolVersion "7.6.1"
 }
@@ -36,4 +41,11 @@ checkstyleMain {
 
 checkstyleTest {
     source ='src/test/java'
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = true
+        html.enabled = false
+    }
 }
