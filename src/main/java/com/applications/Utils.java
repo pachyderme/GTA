@@ -3,6 +3,7 @@ package com.applications;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Utils class.
@@ -21,7 +22,9 @@ public class Utils {
     public static String getUserResponse() {
 
         if (!inTest) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            InputStreamReader inputReader = 
+                    new InputStreamReader(System.in, StandardCharsets.UTF_8);
+            BufferedReader br = new BufferedReader(inputReader);
             try {
                 return br.readLine().trim();
             } catch (IOException e) {

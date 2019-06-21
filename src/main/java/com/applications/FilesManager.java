@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -55,11 +56,11 @@ public class FilesManager {
                 Iterator<T> it = items.iterator();
                 while (it.hasNext()) {
                     Object item = it.next();
-                    byte[] outputResult = item.toString().getBytes();
+                    byte[] outputResult = item.toString().getBytes(StandardCharsets.UTF_8);
                     fos.write(outputResult);
 
                     if (it.hasNext()) {                        
-                        byte[] separator = ";".getBytes();
+                        byte[] separator = ";".getBytes(StandardCharsets.UTF_8);
                         fos.write(separator);
                     }
                 }
