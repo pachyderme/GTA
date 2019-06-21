@@ -55,8 +55,13 @@ public class FilesManager {
                 Iterator<T> it = items.iterator();
                 while (it.hasNext()) {
                     Object item = it.next();
-                    byte[] outputResult = String.join(";", item.toString()).getBytes();
+                    byte[] outputResult = item.toString().getBytes();
                     fos.write(outputResult);
+
+                    if (it.hasNext()) {                        
+                        byte[] separator = ";".getBytes();
+                        fos.write(separator);
+                    }
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

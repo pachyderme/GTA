@@ -48,6 +48,8 @@ public class CommandsManagerTests {
             {"addtask"},
             {"showusers"},
             {"showtasks"},
+            {"assigntask"},
+            {"addtime"},
             {"history"},
             {"help"},
             {"not exist"},

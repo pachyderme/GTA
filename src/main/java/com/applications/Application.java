@@ -17,9 +17,11 @@ public class Application {
     public static void main(String[] args) {
         usersManager = new UsersManager();
         tasksManager = new TasksManager();
-        User loggedUser = usersManager.getUserAccount();
-        
-        CommandsManager commandsManager = new CommandsManager(loggedUser);
-        commandsManager.handleCommands(usersManager, tasksManager);
+        do {
+            User loggedUser = usersManager.getUserAccount();
+            
+            CommandsManager commandsManager = new CommandsManager(loggedUser);
+            commandsManager.handleCommands(usersManager, tasksManager);
+        } while(true);
     }
 }
