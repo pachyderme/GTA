@@ -57,7 +57,7 @@ public class TasksManager {
         boolean results = false;
         Iterator<Task> it = tasks.iterator();
         while (it.hasNext() && !results) {
-            results = it.next().id == task.id;
+            results = it.next().getId() == task.getId();
         }
         return results;
     }
@@ -73,7 +73,7 @@ public class TasksManager {
         Iterator<Task> it = tasks.iterator();
         while (it.hasNext()) {
             Task task = it.next();
-            if (task.id == id) {
+            if (task.getId() == id) {
                 return task;
             }
         }
@@ -127,7 +127,7 @@ public class TasksManager {
             id = 1;
         } else {
             Task lastTask = tasks.get(tasks.size() - 1);
-            id = lastTask.id + 1;
+            id = lastTask.getId() + 1;
         }
         Task task = new Task(id, name);
         tasks.add(task);

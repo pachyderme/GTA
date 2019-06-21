@@ -106,7 +106,7 @@ public class UsersManagerTests {
         usersManager.createAdminIfNotExists();
         User user = usersManager.getUserAccount();
 
-        Assert.assertEquals(user.name, "Admin");
+        Assert.assertEquals(user.getName(), "Admin");
     }
 
     @After

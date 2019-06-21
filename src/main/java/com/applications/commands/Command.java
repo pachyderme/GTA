@@ -10,9 +10,9 @@ import com.applications.User;
  */
 public abstract class Command {
 
-    public transient String name;
-    public transient String description;
-    public transient User loggedUser;
+    protected transient String name;
+    protected transient String description;
+    protected transient User loggedUser;
 
     /**
      * Constructor.
@@ -43,5 +43,9 @@ public abstract class Command {
 
     public String getDescription() {
         return description;
+    }
+
+    public User getLoggedUser() {
+        return loggedUser;
     }
 }

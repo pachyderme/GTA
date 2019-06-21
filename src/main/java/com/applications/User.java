@@ -8,7 +8,7 @@ public class User extends Entity {
     public String type;
 
     public User(String nameSelected) {
-        name = nameSelected;
+        setName(nameSelected);
     }
 
     public String getType() {
@@ -23,6 +23,4 @@ public class User extends Entity {
     public String toString() {
         return getName();
     }
-
-    
 }

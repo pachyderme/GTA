@@ -20,6 +20,6 @@ public class Application {
             
             CommandsManager commandsManager = new CommandsManager(loggedUser);
             commandsManager.handleCommands();
-        } while(true);
+        } while (true);
     }
 }

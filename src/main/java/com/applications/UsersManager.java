@@ -37,7 +37,7 @@ public class UsersManager {
      */
     public boolean userExists(User user) {
         ArrayList<String> users = getUsersFromFile();
-        return users.contains(user.name);
+        return users.contains(user.getName());
     }
 
     /**

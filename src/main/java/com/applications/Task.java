@@ -7,21 +7,21 @@ package com.applications;
  *
  */
 public class Task extends Entity {
-    public String assignedUser = "Admin";
-    public int time = 0;
+    private String assignedUser = "Admin";
+    private int time = 0;
 
     public Task(String nameSelected) {
-        name = nameSelected;
+        setName(nameSelected);
     }
 
     public Task(int idSelected, String nameSelected) {
-        id = idSelected;
-        name = nameSelected;
+        setId(idSelected);
+        setName(nameSelected);
     }
     
     public Task(int idSelected, String nameSelected, String assignedUserSelected) {
-        id = idSelected;
-        name = nameSelected;
+        setId(idSelected);
+        setName(nameSelected);
         assignedUser = assignedUserSelected;
     }
     
@@ -30,8 +30,8 @@ public class Task extends Entity {
             String nameSelected, 
             String assignedUserSelected, 
             int timeSelected) {
-        id = idSelected;
-        name = nameSelected;
+        setId(idSelected);
+        setName(nameSelected);
         assignedUser = assignedUserSelected;
         time = timeSelected;
     }
@@ -45,7 +45,7 @@ public class Task extends Entity {
     }
 
     public int getTime() {
-        return id;
+        return time;
     }
 
     public void setTime(int time) {
@@ -54,6 +54,6 @@ public class Task extends Entity {
 
     @Override
     public String toString() {
-        return id + "," + name + "," + assignedUser + "," + time;
+        return getId() + "," + getName() + "," + assignedUser + "," + time;
     }
 }
