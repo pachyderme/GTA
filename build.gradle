@@ -11,6 +11,7 @@ apply plugin: 'eclipse'
 apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
+apply plugin: 'jdepend'
 
 javadoc {
 	source = sourceSets.main.allJava
