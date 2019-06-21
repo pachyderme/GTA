@@ -1,11 +1,5 @@
 package com.applications;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -27,29 +21,17 @@ public class TasksManager {
      * @return tasks
      */
     public ArrayList<Task> getTasksFromFile() {
+        ArrayList<String> names = FilesManager.readFile(TASKS_FILE_PATH);
         ArrayList<Task> results = new ArrayList<Task>();
-
-        createTasksFileIsNotExists();
-
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(TASKS_FILE_PATH));
-            String line = reader.readLine();
-            while (line != null) {
-                List<String> tmp = Arrays.asList(line.split(";"));
-                Iterator<String> it = tmp.iterator();
-                while (it.hasNext()) {
-                    List<String> tmpTask = Arrays.asList(it.next().split(","));
-                    int taskId = Integer.parseInt(tmpTask.get(0));
-                    Task task = new Task(taskId, tmpTask.get(1), tmpTask.get(2));
-                    results.add(task);
-                }
-                line = reader.readLine();
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        
+        Iterator<String> it = names.iterator();
+        while (it.hasNext()) {
+            List<String> tmpTask = Arrays.asList(it.next().split(","));
+            int taskId = Integer.parseInt(tmpTask.get(0));
+            Task task = new Task(taskId, tmpTask.get(1), tmpTask.get(2));
+            results.add(task);
         }
+        
         return results;
     }
 
@@ -75,36 +57,7 @@ public class TasksManager {
      * @param tasks
      */
     public void saveTasksInFile(ArrayList<Task> tasks) {
-        Iterator<Task> it = tasks.iterator();
-        ArrayList<String> fileContent = new ArrayList<String>();
-        while (it.hasNext()) {
-            fileContent.add(it.next().toString());
-        }
-        try {
-            FileOutputStream fos = new FileOutputStream(TASKS_FILE_PATH);
-
-            try {
-                byte[] outputResult = String.join(";", fileContent).getBytes();
-                fos.write(outputResult);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (fos != null) {
-                        fos.flush();
-                        fos.close();
-                    } else {
-                        Utils.logMessage("fileOutPutStream déjà vide");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FilesManager.saveItemsInFile(TASKS_FILE_PATH, tasks);
     }
 
     /**
@@ -113,9 +66,7 @@ public class TasksManager {
      * @return boolean
      */
     public boolean deleteTasksFile() {
-        File file = new File(TASKS_FILE_PATH);
-
-        return file.delete();
+        return FilesManager.deleteFile(TASKS_FILE_PATH);
     }
 
     /**
@@ -124,25 +75,14 @@ public class TasksManager {
      * @return boolean
      */
     public boolean tasksFileExists() {
-        File file = new File(TASKS_FILE_PATH);
-
-        return file.exists();
+        return FilesManager.fileExists(TASKS_FILE_PATH);
     }
 
     /**
      * Create the tasks file if is not exists.
      */
     public void createTasksFileIsNotExists() {
-        if (!tasksFileExists()) {
-            Utils.logMessage("Création du fichier " + TASKS_FILE_PATH);
-            File file = new File(TASKS_FILE_PATH);
-            file.getParentFile().mkdirs();
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        FilesManager.createFileIsNotExists(TASKS_FILE_PATH);
     }
 
     /**

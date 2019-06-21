@@ -1,4 +1,4 @@
-package com.applications;
+package com.applications.tests;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,10 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.applications.User;
+import com.applications.UsersManager;
+import com.applications.Utils;
 
 /**
  * Users manager tests class.
@@ -90,12 +94,10 @@ public class UsersManagerTests {
         usersManager.deleteUsersFile();
 
         usersManager.createUser("Pierre");
-        usersManager.createUser("Paul");
-        usersManager.createUser("Jacques");
 
         ArrayList<String> users = usersManager.getUsersFromFile();
 
-        Assert.assertEquals(users.size(), 3);
+        Assert.assertEquals(users.size(), 1);
     }
 
     @Test
